@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Felipe Genú e Winne Domingues">
+    <title>Login</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Pode inserir CSS próprio aqui-->
+    <link href="main.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="login-form">
+    <h2 class="m-5">
+        Entrar na sua conta
+    </h2>
+
+    <div>
+        <form name="login" id="login">
+            <div class="mb-4">
+                <label for="user-id" class="form-label">ID de usuário (CPF):</label>
+                <input type="text" class="form-control" id="user-id" data-mask="000.000.000-00"/>
+            </div>
+            <div class="mb-4">
+                <label for="user-password" class="form-label">Senha:</label>
+                <input type="password" class="form-control" id="user-password"/>
+            </div>
+            <div class="mb-4 center-horizontally">
+                <button type="button" class="btn btn-dark" id="login-button">Entrar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="jquery-3.6.0.min.js"></script>
+<script src="jquery.mask.js"></script>
+<script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
