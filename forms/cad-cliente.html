@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="Felipe Genú e Winne Domingues">
+        <title>Cadastro de Cliente</title>
+
+        <!-- Bootstrap core CSS -->
+        <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Pode inserir CSS próprio aqui-->
+        <link href="../css/main.css" rel="stylesheet">
+    </head>
+
+    <body>
+    <div class="forms">
+        <h2 class="m-5">
+            Cadastro de Cliente
+        </h2>
+
+        <div>
+            <for name="cad-cliente" id="cad-cliente">
+                <div class="mb-4">
+                    <label for="client-name" class="form-label">Nome do cliente:</label>
+                    <input type="text" class="form-control" id="client-name"/>
+                </div>
+                <div class="mb-4">
+                    <label for="client-cpf" class="form-label">CPF:</label>
+                    <input type="text" class="form-control" id="client-cpf" data-mask="000.000.000-00"/>
+                </div>
+                <div class="mb-4">
+                    <label for="client-address" class="form-label">Endereço:</label>
+                    <input type="text" class="form-control" id="client-address"/>
+                </div>
+                <div class="mb-4">
+                    <label for="client-neighborhood" class="form-label">Bairro:</label>
+                    <input type="text" class="form-control" id="client-neighborhood"/>
+                </div>
+                <div class="mb-4">
+                    <label for="client-city" class="form-label">Cidade:</label>
+                    <input type="text" class="form-control" id="client-city"/>
+                </div>
+                <div class="mb-4">
+                    <label for="client-uf" class="form-label">UF:</label>
+                    <select class="form-control" id="client-uf">
+                        <option value="">Selecione a UF</option>
+                        <option value="AC">Acre</option>
+                        <option value="AL">Alagoas</option>
+                        <option value="AP">Amapá</option>
+                        <option value="AM">Amazonas</option>
+                        <option value="BA">Bahia</option>
+                        <option value="CE">Ceará</option>
+                        <option value="DF">Distrito Federal</option>
+                        <option value="ES">Espirito Santo</option>
+                        <option value="GO">Goiás</option>
+                        <option value="MA">Maranhão</option>
+                        <option value="MS">Mato Grosso do Sul</option>
+                        <option value="MT">Mato Grosso</option>
+                        <option value="MG">Minas Gerais</option>
+                        <option value="PA">Pará</option>
+                        <option value="PB">Paraíba</option>
+                        <option value="PR">Paraná</option>
+                        <option value="PE">Pernambuco</option>
+                        <option value="PI">Piauí</option>
+                        <option value="RJ">Rio de Janeiro</option>
+                        <option value="RN">Rio Grande do Norte</option>
+                        <option value="RS">Rio Grande do Sul</option>
+                        <option value="RO">Rondônia</option>
+                        <option value="RR">Roraima</option>
+                        <option value="SC">Santa Catarina</option>
+                        <option value="SP">São Paulo</option>
+                        <option value="SE">Sergipe</option>
+                        <option value="TO">Tocantins</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label for="client-cep" class="form-label">CEP:</label>
+                    <input type="text" class="form-control" id="client-cep" data-mask="00.000-000"/>
+                </div>
+                <div class="mb-4">
+                    <label for="client-neighborhood" class="form-label">Telefone:</label>
+                    <input type="text" class="form-control" id="client-neighborhood" data-mask="+55 (00) 000 000 000"/>
+                </div>
+                <div class="mb-4">
+                    <label for="client-email" class="form-label">e-mail:</label>
+                    <input type="email" class="form-control" id="client-email"/>
+                </div>
+                <div class="mb-4 center-horizontally">
+                    <button type="button" class="btn btn-dark" id="login-button">Cadastrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script src="../js/jquery.mask.js"></script>
+    <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>

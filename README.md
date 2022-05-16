@@ -1,4 +1,5 @@
 # webdev
-Trabalho da disciplina de desenvolvimento web. UFF 2022-2
-Professor: Leonardo Cruz Costa
+IC/UFF - 2022-1  
+Trabalho da disciplina Desenvolvimento Web.  
+Professor: Leonardo Cruz Costa  
 Alunos: Felipe Genú e Winne Domingues

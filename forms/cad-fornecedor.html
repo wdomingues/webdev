@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="Felipe Genú e Winne Domingues">
-        <title>Cadastro de Cliente</title>
+        <title>Cadastro de Fornecedor</title>
 
         <!-- Bootstrap core CSS -->
         <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -17,34 +17,34 @@
     <body>
     <div class="forms">
         <h2 class="m-5">
-            Cadastro de Cliente
+            Cadastro de Fornecedor
         </h2>
 
         <div>
             <for name="cad-cliente" id="cad-cliente">
                 <div class="mb-4">
-                    <label for="client-name" class="form-label">Nome do cliente:</label>
-                    <input type="text" class="form-control" id="client-name"/>
+                    <label for="supplier-name" class="form-label">Razão Social:</label>
+                    <input type="text" class="form-control" id="supplier-name"/>
                 </div>
                 <div class="mb-4">
-                    <label for="client-cpf" class="form-label">CPF:</label>
-                    <input type="text" class="form-control" id="client-cpf" data-mask="000.000.000-00"/>
+                    <label for="supplier-cnpj" class="form-label">CNPJ:</label>
+                    <input type="text" class="form-control" id="supplier-cnpj" data-mask="00.000.000/0000-00"/>
                 </div>
                 <div class="mb-4">
-                    <label for="client-address" class="form-label">Endereço:</label>
-                    <input type="text" class="form-control" id="client-address"/>
+                    <label for="supplier-address" class="form-label">Endereço:</label>
+                    <input type="text" class="form-control" id="supplier-address"/>
                 </div>
                 <div class="mb-4">
-                    <label for="client-neighborhood" class="form-label">Bairro:</label>
-                    <input type="text" class="form-control" id="client-neighborhood"/>
+                    <label for="supplier-neighborhood" class="form-label">Bairro:</label>
+                    <input type="text" class="form-control" id="supplier-neighborhood"/>
                 </div>
                 <div class="mb-4">
-                    <label for="client-city" class="form-label">Cidade:</label>
-                    <input type="text" class="form-control" id="client-city"/>
+                    <label for="supplier-city" class="form-label">Cidade:</label>
+                    <input type="text" class="form-control" id="supplier-city"/>
                 </div>
                 <div class="mb-4">
-                    <label for="client-uf" class="form-label">UF:</label>
-                    <select class="form-control" id="client-uf">
+                    <label for="supplier-uf" class="form-label">UF:</label>
+                    <select class="form-control" id="supplier-uf">
                         <option value="">Selecione a UF</option>
                         <option value="AC">Acre</option>
                         <option value="AL">Alagoas</option>
@@ -76,16 +76,16 @@
                     </select>
                 </div>
                 <div class="mb-4">
-                    <label for="client-cep" class="form-label">CEP:</label>
-                    <input type="text" class="form-control" id="client-cep" data-mask="00.000-000"/>
+                    <label for="supplier-cep" class="form-label">CEP:</label>
+                    <input type="text" class="form-control" id="supplier-cep" data-mask="00.000-000"/>
                 </div>
                 <div class="mb-4">
-                    <label for="client-neighborhood" class="form-label">Telefone:</label>
-                    <input type="text" class="form-control" id="client-neighborhood" data-mask="+55 (00) 000 000 000"/>
+                    <label for="supplier-neighborhood" class="form-label">Telefone:</label>
+                    <input type="text" class="form-control" id="supplier-neighborhood" data-mask="+55 (00) 000 000 000"/>
                 </div>
                 <div class="mb-4">
-                    <label for="user-email" class="form-label">e-mail:</label>
-                    <input type="email" class="form-control" id="user-email"/>
+                    <label for="supplier-email" class="form-label">e-mail:</label>
+                    <input type="email" class="form-control" id="supplier-email"/>
                 </div>
                 <div class="mb-4 center-horizontally">
                     <button type="button" class="btn btn-dark" id="login-button">Cadastrar</button>
