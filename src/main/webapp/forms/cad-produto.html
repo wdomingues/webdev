@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="Felipe Genú e Winne Domingues">
+        <title>Cadastro de Produto</title>
+
+        <!-- Bootstrap core CSS -->
+        <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Pode inserir CSS próprio aqui-->
+        <link href="../css/main.css" rel="stylesheet">
+    </head>
+
+    <body>
+    <div class="forms">
+        <h2 class="m-5">
+            Cadastro de Produto
+        </h2>
+
+        <div>
+            <for name="cad-cliente" id="cad-cliente">
+                <div class="mb-4">
+                    <label for="supplier-name" class="form-label">Razão Social:</label>
+                    <input type="text" class="form-control" id="supplier-name"/>
+                </div>
+                <div class="mb-4">
+                    <label for="supplier-cnpj" class="form-label">CNPJ:</label>
+                    <input type="text" class="form-control" id="supplier-cnpj" data-mask="00.000.000/0000-00"/>
+                </div>
+                <div class="mb-4">
+                    <label for="supplier-address" class="form-label">Endereço:</label>
+                    <input type="text" class="form-control" id="supplier-address"/>
+                </div>
+                <div class="mb-4">
+                    <label for="supplier-neighborhood" class="form-label">Bairro:</label>
+                    <input type="text" class="form-control" id="supplier-neighborhood"/>
+                </div>
+                <div class="mb-4">
+                    <label for="supplier-city" class="form-label">Cidade:</label>
+                    <input type="text" class="form-control" id="supplier-city"/>
+                </div>
+                <div class="mb-4">
+                    <label for="supplier-uf" class="form-label">UF:</label>
+                    <select class="form-control" id="supplier-uf">
+                        <option value="">Selecione a UF</option>
+                        <option value="AC">Acre</option>
+                        <option value="AL">Alagoas</option>
+                        <option value="AP">Amapá</option>
+                        <option value="AM">Amazonas</option>
+                        <option value="BA">Bahia</option>
+                        <option value="CE">Ceará</option>
+                        <option value="DF">Distrito Federal</option>
+                        <option value="ES">Espirito Santo</option>
+                        <option value="GO">Goiás</option>
+                        <option value="MA">Maranhão</option>
+                        <option value="MS">Mato Grosso do Sul</option>
+                        <option value="MT">Mato Grosso</option>
+                        <option value="MG">Minas Gerais</option>
+                        <option value="PA">Pará</option>
+                        <option value="PB">Paraíba</option>
+                        <option value="PR">Paraná</option>
+                        <option value="PE">Pernambuco</option>
+                        <option value="PI">Piauí</option>
+                        <option value="RJ">Rio de Janeiro</option>
+                        <option value="RN">Rio Grande do Norte</option>
+                        <option value="RS">Rio Grande do Sul</option>
+                        <option value="RO">Rondônia</option>
+                        <option value="RR">Roraima</option>
+                        <option value="SC">Santa Catarina</option>
+                        <option value="SP">São Paulo</option>
+                        <option value="SE">Sergipe</option>
+                        <option value="TO">Tocantins</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label for="supplier-cep" class="form-label">CEP:</label>
+                    <input type="text" class="form-control" id="supplier-cep" data-mask="00.000-000"/>
+                </div>
+                <div class="mb-4">
+                    <label for="supplier-neighborhood" class="form-label">Telefone:</label>
+                    <input type="text" class="form-control" id="supplier-neighborhood" data-mask="+55 (00) 000 000 000"/>
+                </div>
+                <div class="mb-4">
+                    <label for="supplier-email" class="form-label">e-mail:</label>
+                    <input type="email" class="form-control" id="supplier-email"/>
+                </div>
+                <div class="mb-4 center-horizontally">
+                    <button type="button" class="btn btn-dark" id="login-button">Cadastrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script src="../js/jquery.mask.js"></script>
+    <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>
