@@ -1,0 +1,22 @@
+h1
+{
+	text-align: center;
+	font-weight: bold;
+}
+
+h2
+{
+	text-align: center;
+}
+
+.forms
+{
+	width: 100%;
+	max-width: 400px;
+	margin: auto;
+}
+
+#login-button
+{
+	width: 100%;
+}

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Felipe Genú e Winne Domingues">
+    <title>Cadastro de Compra</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Pode inserir CSS próprio aqui-->
+    <link href="../css/main.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="forms">
+    <h2 class="m-5">
+        Cadastro de Compra
+    </h2>
+
+    <div>
+        <form name="cad-compra" id="cad-compra">
+            <div class="mb-4">
+                <label for="quantidade-compra" class="form-label">Quantidade:</label>
+                <input type="number" class="form-control" id="quantidade-compra"/>
+            </div>
+            <div class="mb-4">
+                <label for="data-compra" class="form-label">Data da compra:</label>
+                <input type="date" class="form-control" id="data-compra"/>
+            </div>
+            <div class="mb-4">
+                <label for="valor-compra" class="form-label">Valor:</label>
+                <input type="number" class="form-control" id="valor-compra"/>
+            </div>
+            <div class="mb-4">
+                <label for="fornecedor-compra" class="form-label">ID do Fornecedor:</label>
+                <input type="number" class="form-control" id="fornecedor-compra"/>
+            </div>
+            <div class="mb-4">
+                <label for="produto-compra" class="form-label">ID do Produto:</label>
+                <input type="number" class="form-control" id="produto-compra"/>
+            </div>
+            <div class="mb-4">
+                <label for="comprador-compra" class="form-label">ID do Comprador:</label>
+                <input type="number" class="form-control" id="comprador-compra"/>
+            </div>
+            <div class="mb-4 center-horizontally">
+                <button type="button" class="btn btn-dark" id="login-button">Cadastrar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="../js/jquery-3.6.0.min.js"></script>
+<script src="../js/jquery.mask.js"></script>
+<script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
