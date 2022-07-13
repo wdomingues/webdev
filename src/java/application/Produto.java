@@ -10,7 +10,7 @@ package application;
  * @author winne
  */
 public class Produto {
-    private long id;
+    private private long id;
     private String nomeProduto;
     private String descricao;
     private double precoCompra;
