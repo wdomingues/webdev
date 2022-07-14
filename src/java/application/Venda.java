@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public class Venda {
     private long id;
-    private long quantidadeVenda;
+    private double quantidadeVenda;
     private Date dataVenda;
     private double valorVenda;
     private long idCliente;
@@ -40,11 +40,11 @@ public class Venda {
         this.id = id;
     }
 
-    public long getQuantidadeVenda() {
+    public double getQuantidadeVenda() {
         return quantidadeVenda;
     }
 
-    public void setQuantidadeVenda(long quantidadeVenda) {
+    public void setQuantidadeVenda(double quantidadeVenda) {
         this.quantidadeVenda = quantidadeVenda;
     }
 

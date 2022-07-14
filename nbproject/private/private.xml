@@ -3,7 +3,24 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/winne/GitHub/DevWeb2022-2/webdev/src/java/application/Venda.java</file>
+            <file>file:/C:/Users/winne/GitHub/DevWeb2022-2/webdev/src/java/model/MyConnection.java</file>
+            <file>file:/C:/Users/winne/GitHub/DevWeb2022-2/webdev/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/winne/GitHub/DevWeb2022-2/webdev/src/java/application/Funcionario.java</file>
+            <file>file:/C:/Users/winne/GitHub/DevWeb2022-2/webdev/src/java/application/Compra.java</file>
+            <file>file:/C:/Users/winne/GitHub/DevWeb2022-2/webdev/src/java/application/Cliente.java</file>
+            <file>file:/C:/Users/winne/GitHub/DevWeb2022-2/webdev/src/java/model/FornecedorDAO.java</file>
+            <file>file:/C:/Users/winne/GitHub/DevWeb2022-2/webdev/src/java/application/IContato.java</file>
+            <file>file:/C:/Users/winne/GitHub/DevWeb2022-2/webdev/src/java/application/Categoria.java</file>
+            <file>file:/C:/Users/winne/GitHub/DevWeb2022-2/webdev/src/java/application/IPessoa.java</file>
+            <file>file:/C:/Users/winne/GitHub/DevWeb2022-2/webdev/src/java/application/Fornecedor.java</file>
+            <file>file:/C:/Users/winne/GitHub/DevWeb2022-2/webdev/src/java/model/ClienteDAO.java</file>
+            <file>file:/C:/Users/winne/GitHub/DevWeb2022-2/webdev/src/java/application/Produto.java</file>
+            <file>file:/C:/Users/winne/GitHub/DevWeb2022-2/webdev/src/java/model/CategoriaDAO.java</file>
+            <file>file:/C:/Users/winne/GitHub/DevWeb2022-2/webdev/src/java/model/ProdutoDAO.java</file>
             <file>file:/C:/Users/winne/GitHub/DevWeb2022-2/webdev/web/index.html</file>
+            <file>file:/C:/Users/winne/GitHub/DevWeb2022-2/webdev/src/java/model/CompraDAO.java</file>
+            <file>file:/C:/Users/winne/GitHub/DevWeb2022-2/webdev/src/java/model/VendaDAO.java</file>
         </group>
     </open-files>
 </project-private>

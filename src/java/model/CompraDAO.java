@@ -8,6 +8,7 @@ package model;
 import application.Compra;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -110,11 +111,11 @@ public class CompraDAO extends HttpServlet {
             
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setDouble(1, product.getQuantidadeCompra());
-            ps.setDate(2, product.getDataCompra());
+            ps.setDate(2, new Date(product.getDataCompra().getTime()));
             ps.setDouble(3, product.getValorCompra());
             ps.setLong(4, product.getIdFornecedor());
             ps.setLong(5, product.getIdProduto());
-            ps.setString(6, product.getIdFuncionario());
+            ps.setLong(6, product.getIdFuncionario());
            
             if (product.getId()> 0)
                 ps.setLong(attribList.size(), product.getId());
@@ -139,6 +140,4 @@ public class CompraDAO extends HttpServlet {
             return false;
         }
     }
-    
-    
 }

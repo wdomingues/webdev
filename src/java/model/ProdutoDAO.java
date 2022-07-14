@@ -63,7 +63,7 @@ public class ProdutoDAO extends HttpServlet {
                 product.setDescricao(rs.getString("descricao"));
                 product.setPrecoCompra(rs.getDouble("preco_compra"));
                 product.setPrecoVenda(rs.getDouble("preco_venda"));
-                product.setQuantidadeDisponivel(rs.getDouble("quantidade_disponivel"));
+                product.setQtdDisponivel(rs.getDouble("quantidade_disponivel"));
                 product.setLiberadoVenda(rs.getString("liberado_venda"));
                 product.setIdCategoria(rs.getLong("id_categoria"));
 
@@ -89,7 +89,7 @@ public class ProdutoDAO extends HttpServlet {
                 product.setDescricao(rs.getString("descricao"));
                 product.setPrecoCompra(rs.getDouble("preco_compra"));
                 product.setPrecoVenda(rs.getDouble("preco_venda"));
-                product.setQuantidadeDisponivel(rs.getDouble("quantidade_disponivel"));
+                product.setQtdDisponivel(rs.getDouble("quantidade_disponivel"));
                 product.setLiberadoVenda(rs.getString("liberado_venda"));
                 product.setIdCategoria(rs.getLong("id_categoria"));
             }
@@ -115,9 +115,9 @@ public class ProdutoDAO extends HttpServlet {
             ps.setString(2, product.getDescricao());
             ps.setDouble(3, product.getPrecoCompra());
             ps.setDouble(4, product.getPrecoVenda());
-            ps.setDouble(5, product.gerQuantidadeDisponivel());
+            ps.setDouble(5, product.getQtdDisponivel());
             ps.setString(6, product.getLiberadoVenda());
-            ps.setString(7, product.getIdCategoria());
+            ps.setLong(7, product.getIdCategoria());
            
             if (product.getId()> 0)
                 ps.setLong(attribList.size(), product.getId());

@@ -10,10 +10,10 @@ package application;
  * @author winne
  */
 public interface IContato {
-    private String endereco;
-    private String cidade;
-    private String uf;
-    private String cep = "";
-    private String telefone = "";
-    private String email = "";
+    String endereco = "";
+    String cidade = "";
+    String uf = "";
+    String cep = "";
+    String telefone = "";
+    String email = "";
 }

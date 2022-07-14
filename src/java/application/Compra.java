@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public class Compra {
     private long id;
-    private long quantidadeCompra;
+    private double quantidadeCompra;
     private Date dataCompra;
     private double valorCompra;
     private long idFornecedor;
@@ -22,7 +22,7 @@ public class Compra {
 
     public Compra() {}
 
-    public Compra(long id, long quantidadeCompra, Date dataCompra, double valorCompra, long idFornecedor, long idProduto, long idFuncionario) {
+    public Compra(long id, double quantidadeCompra, Date dataCompra, double valorCompra, long idFornecedor, long idProduto, long idFuncionario) {
         this.id = id;
         this.quantidadeCompra = quantidadeCompra;
         this.dataCompra = dataCompra;
@@ -40,11 +40,11 @@ public class Compra {
         this.id = id;
     }
 
-    public long getQuantidadeCompra() {
+    public double getQuantidadeCompra() {
         return quantidadeCompra;
     }
 
-    public void setQuantidadeCompra(long quantidadeCompra) {
+    public void setQuantidadeCompra(double quantidadeCompra) {
         this.quantidadeCompra = quantidadeCompra;
     }
 
