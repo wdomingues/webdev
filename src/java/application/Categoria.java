@@ -10,21 +10,21 @@ package application;
  * @author winne
  */
 public class Categoria {
-    private long id;
-    private String nomeCategoria;
+    private int id;
+    private String nomeCategoria; //50 caracteres
 
     public Categoria() {}
 
-    public Categoria(long id, String nomeCategoria) {
+    public Categoria(int id, String nomeCategoria) {
         this.id = id;
         this.nomeCategoria = nomeCategoria;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

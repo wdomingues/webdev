@@ -10,7 +10,7 @@ package application;
  * @author winne
  */
 public interface IPessoa {
-    long id = 0L;
+    int id = 0;
     String nome = "";
     String documento = "";
 }

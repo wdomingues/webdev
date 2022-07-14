@@ -52,6 +52,16 @@ public class CompraDAO extends HttpServlet {
             System.out.println(e);
         }
     }
+    
+    private int convertFloat2Int(float f){
+        return Math.round (f * 100f);
+    }
+    private float convertInt2Float(int i){
+        if (i == 0) return 0f;
+        return i / 100f;
+    }
+    
+    
     public ArrayList<Compra> getAll() {
         ArrayList<Compra> compras = new ArrayList<>();
         try {            
@@ -59,13 +69,13 @@ public class CompraDAO extends HttpServlet {
             ResultSet rs = stmt.executeQuery("select * from " + TABLE);
             while(rs.next()) {
                 Compra product = new Compra();
-                product.setId(rs.getLong("id"));
-                product.setQuantidadeCompra(rs.getDouble("quantidade_compra"));
+                product.setId(rs.getInt("id"));
+                product.setQuantidadeCompra(rs.getInt("quantidade_compra"));
                 product.setDataCompra(rs.getDate("data_compra"));
-                product.setValorCompra(rs.getDouble("valor_compra"));
-                product.setIdFornecedor(rs.getLong("id_fornecedor"));
-                product.setIdProduto(rs.getLong("id_produto"));
-                product.setIdFuncionario(rs.getLong("id_funcionario"));
+                product.setValorCompra(convertInt2Float(rs.getInt("valor_compra"))); //no BD está como int
+                product.setIdFornecedor(rs.getInt("id_fornecedor"));
+                product.setIdProduto(rs.getInt("id_produto"));
+                product.setIdFuncionario(rs.getInt("id_funcionario"));
 
                 compras.add(product);
             }
@@ -75,22 +85,22 @@ public class CompraDAO extends HttpServlet {
         return compras;
     }
     
-    public Compra getById(long id) {
+    public Compra getById(int id) {
         Compra product = new Compra();
         try {
             String sql = "SELECT * FROM " + TABLE + " WHERE id = ?";
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setLong(1, id);
+            ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             
             if (rs.next()) {
-                product.setId(rs.getLong("id"));
-                product.setQuantidadeCompra(rs.getDouble("quantidade_compra"));
+                product.setId(rs.getInt("id"));
+                product.setQuantidadeCompra(rs.getInt("quantidade_compra"));
                 product.setDataCompra(rs.getDate("data_compra"));
-                product.setValorCompra(rs.getDouble("valor_compra"));
-                product.setIdFornecedor(rs.getLong("id_fornecedor"));
-                product.setIdProduto(rs.getLong("id_produto"));
-                product.setIdFuncionario(rs.getLong("id_funcionario"));
+                product.setValorCompra(convertInt2Float(rs.getInt("valor_compra"))); //no BD está como int
+                product.setIdFornecedor(rs.getInt("id_fornecedor"));
+                product.setIdProduto(rs.getInt("id_produto"));
+                product.setIdFuncionario(rs.getInt("id_funcionario"));
             }
         } catch( SQLException e ) {
             System.out.println("Erro de SQL: " + e.getMessage());
@@ -110,15 +120,15 @@ public class CompraDAO extends HttpServlet {
             }
             
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setDouble(1, product.getQuantidadeCompra());
+            ps.setInt(1, product.getQuantidadeCompra());
             ps.setDate(2, new Date(product.getDataCompra().getTime()));
-            ps.setDouble(3, product.getValorCompra());
-            ps.setLong(4, product.getIdFornecedor());
-            ps.setLong(5, product.getIdProduto());
-            ps.setLong(6, product.getIdFuncionario());
+            ps.setInt(3, convertFloat2Int(product.getValorCompra())); //no BD está como int: gravando *100
+            ps.setInt(4, product.getIdFornecedor());
+            ps.setInt(5, product.getIdProduto());
+            ps.setInt(6, product.getIdFuncionario());
            
             if (product.getId()> 0)
-                ps.setLong(attribList.size(), product.getId());
+                ps.setInt(attribList.size(), product.getId());
             
             ps.execute();
             return true;
@@ -128,11 +138,11 @@ public class CompraDAO extends HttpServlet {
         }
     }
     
-    public boolean delete(long id) {
+    public boolean delete(int id) {
         try {
             String sql = "DELETE FROM " + TABLE + " WHERE id = ?";
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setLong(1, id);
+            ps.setInt(1, id);
             ps.execute();
             return true;
         } catch( SQLException e ) {

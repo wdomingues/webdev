@@ -12,17 +12,17 @@ import java.util.Date;
  * @author winne
  */
 public class Venda {
-    private long id;
-    private double quantidadeVenda;
+    private int id;
+    private int quantidadeVenda;
     private Date dataVenda;
-    private double valorVenda;
-    private long idCliente;
-    private long idProduto;
-    private long idFuncionario;
+    private float valorVenda;
+    private int idCliente;
+    private int idProduto;
+    private int idFuncionario;
 
     public Venda() {}
 
-    public Venda(long id, long quantidadeVenda, Date dataVenda, double valorVenda, long idCliente, long idProduto, long idFuncionario) {
+    public Venda(int id, int quantidadeVenda, Date dataVenda, float valorVenda, int idCliente, int idProduto, int idFuncionario) {
         this.id = id;
         this.quantidadeVenda = quantidadeVenda;
         this.dataVenda = dataVenda;
@@ -32,19 +32,19 @@ public class Venda {
         this.idFuncionario = idFuncionario;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public double getQuantidadeVenda() {
+    public int getQuantidadeVenda() {
         return quantidadeVenda;
     }
 
-    public void setQuantidadeVenda(double quantidadeVenda) {
+    public void setQuantidadeVenda(int quantidadeVenda) {
         this.quantidadeVenda = quantidadeVenda;
     }
 
@@ -56,35 +56,35 @@ public class Venda {
         this.dataVenda = dataVenda;
     }
 
-    public double getValorVenda() {
+    public float getValorVenda() {
         return valorVenda;
     }
 
-    public void setValorVenda(double valorVenda) {
+    public void setValorVenda(float valorVenda) {
         this.valorVenda = valorVenda;
     }
 
-    public long getIdCliente() {
+    public int getIdCliente() {
         return idCliente;
     }
 
-    public void setIdCliente(long idCliente) {
+    public void setIdCliente(int idCliente) {
         this.idCliente = idCliente;
     }
 
-    public long getIdProduto() {
+    public int getIdProduto() {
         return idProduto;
     }
 
-    public void setIdProduto(long idProduto) {
+    public void setIdProduto(int idProduto) {
         this.idProduto = idProduto;
     }
 
-    public long getIdFuncionario() {
+    public int getIdFuncionario() {
         return idFuncionario;
     }
 
-    public void setIdFuncionario(long idFuncionario) {
+    public void setIdFuncionario(int idFuncionario) {
         this.idFuncionario = idFuncionario;
     }
 }

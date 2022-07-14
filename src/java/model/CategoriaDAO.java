@@ -57,7 +57,7 @@ public class CategoriaDAO extends HttpServlet {
             ResultSet rs = stmt.executeQuery("select * from " + TABLE);
             while(rs.next()) {
                 Categoria category = new Categoria();
-                category.setId(rs.getLong("id"));
+                category.setId(rs.getInt("id"));
                 category.setNomeCategoria(rs.getString("nome_categoria"));
 
                 categoryes.add(category);
@@ -68,7 +68,7 @@ public class CategoriaDAO extends HttpServlet {
         return categoryes;
     }
     
-    public Categoria getById(long id) {
+    public Categoria getById(int id) {
         Categoria category = new Categoria();
         try {
             String sql = "SELECT * FROM " + TABLE + " WHERE id = ?";
@@ -77,7 +77,7 @@ public class CategoriaDAO extends HttpServlet {
             ResultSet rs = ps.executeQuery();
             
             if (rs.next()) {
-                category.setId(rs.getLong("id"));
+                category.setId(rs.getInt("id"));
                 category.setNomeCategoria(rs.getString("nome_categoria"));
 
             }
@@ -102,7 +102,7 @@ public class CategoriaDAO extends HttpServlet {
             ps.setString(1, category.getNomeCategoria());
            
             if (category.getId()> 0)
-                ps.setLong(attribList.size(), category.getId());
+                ps.setInt(attribList.size(), category.getId());
             
             ps.execute();
             return true;
@@ -112,7 +112,7 @@ public class CategoriaDAO extends HttpServlet {
         }
     }
     
-    public boolean delete(long id) {
+    public boolean delete(int id) {
         try {
             String sql = "DELETE FROM " + TABLE + " WHERE id = ?";
             PreparedStatement ps = connection.prepareStatement(sql);

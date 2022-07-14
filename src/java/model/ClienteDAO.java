@@ -57,7 +57,7 @@ public class ClienteDAO extends HttpServlet {
             ResultSet rs = stmt.executeQuery("select * from " + TABLE);
             while(rs.next()) {
                 Cliente client = new Cliente();
-                client.setId(rs.getLong("id"));
+                client.setId(rs.getInt("id"));
                 client.setNome(rs.getString("nome"));
                 client.setDocumento(rs.getString("cpf"));
                 client.setEndereco(rs.getString("endereco"));
@@ -76,16 +76,16 @@ public class ClienteDAO extends HttpServlet {
         return clientes;
     }
     
-    public Cliente getById(long id) {
+    public Cliente getById(int id) {
         Cliente client = new Cliente();
         try {
             String sql = "SELECT * FROM " + TABLE + " WHERE id = ?";
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setLong(1, id);
+            ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             
             if (rs.next()) {
-                client.setId(rs.getLong("id"));
+                client.setId(rs.getInt("id"));
                 client.setNome(rs.getString("nome"));
                 client.setDocumento(rs.getString("cpf"));
                 client.setEndereco(rs.getString("endereco"));
@@ -125,7 +125,7 @@ public class ClienteDAO extends HttpServlet {
             ps.setString(9, client.getEmail());
            
             if (client.getId()> 0)
-                ps.setLong(attribList.size(), client.getId());
+                ps.setInt(attribList.size(), client.getId());
             
             ps.execute();
             return true;
@@ -135,11 +135,11 @@ public class ClienteDAO extends HttpServlet {
         }
     }
     
-    public boolean delete(long id) {
+    public boolean delete(int id) {
         try {
             String sql = "DELETE FROM " + TABLE + " WHERE id = ?";
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setLong(1, id);
+            ps.setInt(1, id);
             ps.execute();
             return true;
         } catch( SQLException e ) {

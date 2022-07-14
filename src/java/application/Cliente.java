@@ -10,21 +10,21 @@ package application;
  * @author winne
  */
 public class Cliente implements IPessoa, IContato{
-    private long id;
-    private String nome; //nome
-    private String documento; //cpf
-    private String endereco;
-    private String bairro;
-    private String cidade;
-    private String uf;
-    private String cep;
-    private String telefone;
-    private String email;
+    private int id;
+    private String nome; //nome 50 caracteres
+    private String documento; //cpf 14 caracteres 123.456.789-00
+    private String endereco; //50 caracteres
+    private String bairro; //50 caracteres
+    private String cidade; //50 caracteres
+    private String uf; //2 caracteres
+    private String cep; //8 caracteres 01245000
+    private String telefone; //20 caracteres +55 (21) 983 749 303
+    private String email; //50 caracteres
 
     public Cliente() {
     }
 
-    public Cliente(long id, String nome, String documento, String endereco, String bairro, String cidade, String uf, String cep, String telefone, String email) {
+    public Cliente(int id, String nome, String documento, String endereco, String bairro, String cidade, String uf, String cep, String telefone, String email) {
         this.id = id;
         this.nome = nome;
         this.documento = documento;
@@ -37,11 +37,11 @@ public class Cliente implements IPessoa, IContato{
         this.email = email;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

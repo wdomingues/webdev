@@ -58,14 +58,14 @@ public class ProdutoDAO extends HttpServlet {
             ResultSet rs = stmt.executeQuery("select * from " + TABLE);
             while(rs.next()) {
                 Produto product = new Produto();
-                product.setId(rs.getLong("id"));
+                product.setId(rs.getInt("id"));
                 product.setNomeProduto(rs.getString("nome_produto"));
                 product.setDescricao(rs.getString("descricao"));
-                product.setPrecoCompra(rs.getDouble("preco_compra"));
-                product.setPrecoVenda(rs.getDouble("preco_venda"));
-                product.setQtdDisponivel(rs.getDouble("quantidade_disponivel"));
+                product.setPrecoCompra(rs.getFloat("preco_compra"));
+                product.setPrecoVenda(rs.getFloat("preco_venda"));
+                product.setQuantidadeDisponivel(rs.getInt("quantidade_disponivel"));
                 product.setLiberadoVenda(rs.getString("liberado_venda"));
-                product.setIdCategoria(rs.getLong("id_categoria"));
+                product.setIdCategoria(rs.getInt("id_categoria"));
 
                 products.add(product);
             }
@@ -75,7 +75,7 @@ public class ProdutoDAO extends HttpServlet {
         return products;
     }
     
-    public Produto getById(long id) {
+    public Produto getById(int id) {
         Produto product = new Produto();
         try {
             String sql = "SELECT * FROM " + TABLE + " WHERE id = ?";
@@ -84,14 +84,14 @@ public class ProdutoDAO extends HttpServlet {
             ResultSet rs = ps.executeQuery();
             
             if (rs.next()) {
-                product.setId(rs.getLong("id"));
+                product.setId(rs.getInt("id"));
                 product.setNomeProduto(rs.getString("nome_produto"));
                 product.setDescricao(rs.getString("descricao"));
-                product.setPrecoCompra(rs.getDouble("preco_compra"));
-                product.setPrecoVenda(rs.getDouble("preco_venda"));
-                product.setQtdDisponivel(rs.getDouble("quantidade_disponivel"));
+                product.setPrecoCompra(rs.getFloat("preco_compra"));
+                product.setPrecoVenda(rs.getFloat("preco_venda"));
+                product.setQuantidadeDisponivel(rs.getInt("quantidade_disponivel"));
                 product.setLiberadoVenda(rs.getString("liberado_venda"));
-                product.setIdCategoria(rs.getLong("id_categoria"));
+                product.setIdCategoria(rs.getInt("id_categoria"));
             }
         } catch( SQLException e ) {
             System.out.println("Erro de SQL: " + e.getMessage());
@@ -113,14 +113,14 @@ public class ProdutoDAO extends HttpServlet {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, product.getNomeProduto());
             ps.setString(2, product.getDescricao());
-            ps.setDouble(3, product.getPrecoCompra());
-            ps.setDouble(4, product.getPrecoVenda());
-            ps.setDouble(5, product.getQtdDisponivel());
-            ps.setString(6, product.getLiberadoVenda());
-            ps.setLong(7, product.getIdCategoria());
+            ps.setFloat(3, product.getPrecoCompra());
+            ps.setFloat(4, product.getPrecoVenda());
+            ps.setInt(5, product.getQuantidadeDisponivel());
+            ps.setString(6, product.getLiberadoVenda().substring(0,1)); //get just the first char
+            ps.setInt(7, product.getIdCategoria());
            
             if (product.getId()> 0)
-                ps.setLong(attribList.size(), product.getId());
+                ps.setInt(attribList.size(), product.getId());
             
             ps.execute();
             return true;
@@ -130,7 +130,7 @@ public class ProdutoDAO extends HttpServlet {
         }
     }
     
-    public boolean delete(long id) {
+    public boolean delete(int id) {
         try {
             String sql = "DELETE FROM " + TABLE + " WHERE id = ?";
             PreparedStatement ps = connection.prepareStatement(sql);

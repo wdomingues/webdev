@@ -10,35 +10,35 @@ package application;
  * @author winne
  */
 public class Produto {
-    private long id;
-    private String nomeProduto;
-    private String descricao;
-    private double precoCompra;
-    private double precoVenda;
-    private double qtdDisponivel;
-    private String liberadoVenda;
-    private long idCategoria;
+    private int id; 
+    private String nomeProduto; //100 caracteres
+    private String descricao; //255 caracteres
+    private float precoCompra; //10,2 caracteres
+    private float precoVenda; //10,2 caracteres
+    private int quantidadeDisponivel; 
+    private String liberadoVenda; //1 caracter
+    private int idCategoria; 
 
     public Produto() {
     }
 
-    public Produto(long id, String nomeProduto, String descricao, double precoCompra, 
-            double precoVenda, double qtdDisponivel, String liberadoVenda, long idCategoria) {
+    public Produto(int id, String nomeProduto, String descricao, float precoCompra, 
+            float precoVenda, int quantidadeDisponivel, String liberadoVenda, int idCategoria) {
         this.id = id;
         this.nomeProduto = nomeProduto;
         this.descricao = descricao;
         this.precoCompra = precoCompra;
         this.precoVenda = precoVenda;
-        this.qtdDisponivel = qtdDisponivel;
+        this.quantidadeDisponivel = quantidadeDisponivel;
         this.liberadoVenda = liberadoVenda;
         this.idCategoria = idCategoria;
     }
     
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -58,28 +58,28 @@ public class Produto {
         this.descricao = descricao;
     }
 
-    public double getPrecoCompra() {
+    public float getPrecoCompra() {
         return precoCompra;
     }
 
-    public void setPrecoCompra(double precoCompra) {
+    public void setPrecoCompra(float precoCompra) {
         this.precoCompra = precoCompra;
     }
 
-    public double getPrecoVenda() {
+    public float getPrecoVenda() {
         return precoVenda;
     }
 
-    public void setPrecoVenda(double precoVenda) {
+    public void setPrecoVenda(float precoVenda) {
         this.precoVenda = precoVenda;
     }
 
-    public double getQtdDisponivel() {
-        return qtdDisponivel;
+    public int getQuantidadeDisponivel() {
+        return quantidadeDisponivel;
     }
 
-    public void setQtdDisponivel(double qtdDisponivel) {
-        this.qtdDisponivel = qtdDisponivel;
+    public void setQuantidadeDisponivel(int qtdDisponivel) {
+        this.quantidadeDisponivel = qtdDisponivel;
     }
 
     public String getLiberadoVenda() {
@@ -90,11 +90,11 @@ public class Produto {
         this.liberadoVenda = liberadoVenda;
     }
 
-    public long getIdCategoria() {
+    public int getIdCategoria() {
         return idCategoria;
     }
 
-    public void setIdCategoria(long idCategoria) {
+    public void setIdCategoria(int idCategoria) {
         this.idCategoria = idCategoria;
     }
 }

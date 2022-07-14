@@ -12,17 +12,17 @@ import java.util.Date;
  * @author winne
  */
 public class Compra {
-    private long id;
-    private double quantidadeCompra;
+    private int id;
+    private int quantidadeCompra;
     private Date dataCompra;
-    private double valorCompra;
-    private long idFornecedor;
-    private long idProduto;
-    private long idFuncionario;
+    private float valorCompra; //no DB está int
+    private int idFornecedor;
+    private int idProduto;
+    private int idFuncionario;
 
     public Compra() {}
 
-    public Compra(long id, double quantidadeCompra, Date dataCompra, double valorCompra, long idFornecedor, long idProduto, long idFuncionario) {
+    public Compra(int id, int quantidadeCompra, Date dataCompra, float valorCompra, int idFornecedor, int idProduto, int idFuncionario) {
         this.id = id;
         this.quantidadeCompra = quantidadeCompra;
         this.dataCompra = dataCompra;
@@ -32,19 +32,19 @@ public class Compra {
         this.idFuncionario = idFuncionario;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public double getQuantidadeCompra() {
+    public int getQuantidadeCompra() {
         return quantidadeCompra;
     }
 
-    public void setQuantidadeCompra(double quantidadeCompra) {
+    public void setQuantidadeCompra(int quantidadeCompra) {
         this.quantidadeCompra = quantidadeCompra;
     }
 
@@ -56,35 +56,35 @@ public class Compra {
         this.dataCompra = dataCompra;
     }
 
-    public double getValorCompra() {
+    public float getValorCompra() {
         return valorCompra;
     }
 
-    public void setValorCompra(double valorCompra) {
+    public void setValorCompra(float valorCompra) {
         this.valorCompra = valorCompra;
     }
 
-    public long getIdFornecedor() {
+    public int getIdFornecedor() {
         return idFornecedor;
     }
 
-    public void setIdFornecedor(long idFornecedor) {
+    public void setIdFornecedor(int idFornecedor) {
         this.idFornecedor = idFornecedor;
     }
 
-    public long getIdProduto() {
+    public int getIdProduto() {
         return idProduto;
     }
 
-    public void setIdProduto(long idProduto) {
+    public void setIdProduto(int idProduto) {
         this.idProduto = idProduto;
     }
 
-    public long getIdFuncionario() {
+    public int getIdFuncionario() {
         return idFuncionario;
     }
 
-    public void setIdFuncionario(long idFuncionario) {
+    public void setIdFuncionario(int idFuncionario) {
         this.idFuncionario = idFuncionario;
     }
 }

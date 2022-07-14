@@ -10,20 +10,20 @@ package application;
  * @author winne
  */
 public class Fornecedor implements IPessoa, IContato{
-    private long id;
-    private String nome; //Razão Social
-    private String documento; //CNPJ
-    private String endereco;
-    private String bairro;
-    private String cidade;
-    private String uf;
-    private String cep;
-    private String telefone;
-    private String email;
+    private int id;
+    private String nome; //Razão Social //50 caracteres
+    private String documento; //CNPJ //18 caracteres 98.765.432/0001-00
+    private String endereco; //50 caracteres
+    private String bairro; //50 caracteres
+    private String cidade; //50 caracteres
+    private String uf; //2 caracteres
+    private String cep; //9 caracteres 01245-000
+    private String telefone; //20 caracteres +55 (21) 983 749 303
+    private String email; //50 caracteres
 
     public Fornecedor() {}
 
-    public Fornecedor(long id, String nome, String documento, String endereco, String bairro, String cidade, String uf, String cep, String telefone, String email) {
+    public Fornecedor(int id, String nome, String documento, String endereco, String bairro, String cidade, String uf, String cep, String telefone, String email) {
         this.id = id;
         this.nome = nome;
         this.documento = documento;
@@ -36,11 +36,11 @@ public class Fornecedor implements IPessoa, IContato{
         this.email = email;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

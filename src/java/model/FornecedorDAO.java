@@ -57,7 +57,7 @@ public class FornecedorDAO extends HttpServlet {
             ResultSet rs = stmt.executeQuery("select * from " + TABLE);
             while(rs.next()) {
                 Fornecedor supplier = new Fornecedor();
-                supplier.setId(rs.getLong("id"));
+                supplier.setId(rs.getInt("id"));
                 supplier.setNome(rs.getString("razao_social"));
                 supplier.setDocumento(rs.getString("cnpj"));
                 supplier.setEndereco(rs.getString("endereco"));
@@ -76,16 +76,16 @@ public class FornecedorDAO extends HttpServlet {
         return suppliers;
     }
     
-    public Fornecedor getById(long id) {
+    public Fornecedor getById(int id) {
         Fornecedor supplier = new Fornecedor();
         try {
             String sql = "SELECT * FROM " + TABLE + " WHERE id = ?";
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setLong(1, id);
+            ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             
             if (rs.next()) {
-                supplier.setId(rs.getLong("id"));
+                supplier.setId(rs.getInt("id"));
                 supplier.setNome(rs.getString("razaoSocial"));
                 supplier.setDocumento(rs.getString("cnpj"));
                 supplier.setEndereco(rs.getString("endereco"));
@@ -125,7 +125,7 @@ public class FornecedorDAO extends HttpServlet {
             ps.setString(9, supplier.getEmail());
            
             if (supplier.getId()> 0)
-                ps.setLong(attribList.size(), supplier.getId());
+                ps.setInt(attribList.size(), supplier.getId());
             
             ps.execute();
             return true;
@@ -135,11 +135,11 @@ public class FornecedorDAO extends HttpServlet {
         }
     }
     
-    public boolean delete(long id) {
+    public boolean delete(int id) {
         try {
             String sql = "DELETE FROM " + TABLE + " WHERE id = ?";
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setLong(1, id);
+            ps.setInt(1, id);
             ps.execute();
             return true;
         } catch( SQLException e ) {

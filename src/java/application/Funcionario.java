@@ -10,15 +10,15 @@ package application;
  * @author winne
  */
 public class Funcionario implements IPessoa {
-    private long id;
-    private String nome; //nome
-    private String documento; //cpf
-    private String senha;
-    private String papel;
+    private int id;
+    private String nome; //nome //até 50 caracteres
+    private String documento; //cpf 14 caracteres 123.456.789-00
+    private String senha; //10 caracteres
+    private String papel; //1 caracter
 
     public Funcionario(){}
 
-    public Funcionario(long id, String nome, String documento, String senha, String papel) {
+    public Funcionario(int id, String nome, String documento, String senha, String papel) {
         this.id = id;
         this.nome = nome;
         this.documento = documento;
@@ -26,11 +26,11 @@ public class Funcionario implements IPessoa {
         this.papel = papel;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
