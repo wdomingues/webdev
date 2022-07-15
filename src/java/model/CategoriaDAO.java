@@ -37,9 +37,9 @@ public class CategoriaDAO extends HttpServlet {
      */
     
     private Connection connection;
-    private static final String TABLE = "categoria";
+    private static final String TABLE = "categorias";
     private static final String TABLEATTRIBUTES = 
-        "id, categoria";
+        "nome_categoria";
             
     public CategoriaDAO() {
         try {
@@ -91,18 +91,26 @@ public class CategoriaDAO extends HttpServlet {
         try {
             String sql;
             List<String> attribList = Arrays.asList(TABLEATTRIBUTES.trim().split(","));
-            attribList.forEach((p) -> { p = p+"=?"; });
+            
+            String parameters = "", paramVars = "" ;
+            for (String attrib : attribList){
+                parameters += attrib+"=?, ";
+                paramVars += "?,";
+            }
+            parameters = parameters.substring(0, parameters.length()-2);
+            paramVars = "(" + paramVars.substring(0, paramVars.length()-1) + ")";
+                
             if (category.getId() == 0) {
-                sql = "INSERT INTO " + TABLE + " (" +  TABLEATTRIBUTES + ") VALUES (?,?)";
+                sql = "INSERT INTO " + TABLE + " (" +  TABLEATTRIBUTES + ") VALUES" + paramVars;
             } else {
-                sql = "UPDATE " + TABLE + " SET " + attribList.toString() + " WHERE id=?";
+                sql = "UPDATE " + TABLE + " SET " + parameters + " WHERE id=?";
             }
             
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, category.getNomeCategoria());
            
             if (category.getId()> 0)
-                ps.setInt(attribList.size(), category.getId());
+                ps.setInt(attribList.size()+1, category.getId());
             
             ps.execute();
             return true;

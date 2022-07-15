@@ -6,6 +6,9 @@
 package controller;
 
 
+import application.Cliente;
+import application.Funcionario;
+import application.Produto;
 import application.Venda;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,6 +20,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.VendaDAO;
+import model.FuncionarioDAO;
+import model.ProdutoDAO;
+import model.ClienteDAO;
+
 
 /**
  *
@@ -48,19 +55,31 @@ public class VendaController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         VendaDAO vendaDAO = new VendaDAO();
+        ClienteDAO clienteDAO = new ClienteDAO();
+        ProdutoDAO produtoDAO = new ProdutoDAO();
+        FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+        ArrayList<Cliente> myClients;
+        ArrayList<Produto> myProducts;
+        ArrayList<Funcionario> myEmployees;
         String option = (String) request.getParameter("option");
         int id;
         ArrayList<Venda> myVendas;
+
         Venda venda = new Venda();
         
         switch (option) {
             case "get":
                 myVendas = vendaDAO.getAll();
+                myClients = clienteDAO.getAll();
+                myProducts = produtoDAO.getAll();
+                myEmployees = funcionarioDAO.getAll();
                 request.setAttribute("myVendas", myVendas);
-                RequestDispatcher show = getServletContext().getRequestDispatcher("/ListaVendasView.jsp");
+                request.setAttribute("myClients", myClients);
+                request.setAttribute("myProducts", myProducts);
+                request.setAttribute("myEmployees", myEmployees);
+                RequestDispatcher show = getServletContext().getRequestDispatcher("/views/ListaVendasView.jsp");
                 show.forward(request, response);
                 break;
-
             case "insert":
                 venda.setId(0);
                 venda.setQuantidadeVenda(0);
@@ -71,7 +90,7 @@ public class VendaController extends HttpServlet {
                 venda.setIdFuncionario(0);
 
                 request.setAttribute("venda", venda);
-                RequestDispatcher insert = getServletContext().getRequestDispatcher("/FormVenda.jsp");
+                RequestDispatcher insert = getServletContext().getRequestDispatcher("/forms/FormVenda.jsp");
                 insert.forward(request, response);
                 break;
 
@@ -82,12 +101,12 @@ public class VendaController extends HttpServlet {
 
                 if (venda.getId() > 0) {
                     request.setAttribute("venda", venda);
-                    RequestDispatcher rs = request.getRequestDispatcher("FormVenda.jsp");
+                    RequestDispatcher rs = request.getRequestDispatcher("/forms/FormVenda.jsp");
                     rs.forward(request, response);
                 } else {
                     String message = "Erroao salvar venda!";
                     request.setAttribute("message", message);
-                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/SavingMessage.jsp");
+                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/auxJSPs/VendaSavingMessage.jsp");
                     rd.forward(request, response);
                 }
                 break;
@@ -99,7 +118,7 @@ public class VendaController extends HttpServlet {
 
                 myVendas = vendaDAO.getAll();
                 request.setAttribute("myVendas", myVendas);
-                RequestDispatcher listAfterDeleting = getServletContext().getRequestDispatcher("/ListaVendasView.jsp");
+                RequestDispatcher listAfterDeleting = getServletContext().getRequestDispatcher("/views/ListaVendasView.jsp");
                 listAfterDeleting.forward(request, response);
                 break;
         }
@@ -138,13 +157,13 @@ public class VendaController extends HttpServlet {
             }
 
             request.setAttribute("message", message);
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/SavingMessage.jsp");
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/auxJSPs/VendaSavingMessage.jsp");
             rd.forward(request, response);
 
         } catch (Exception e) {
             message = "Erro ao salvar Venda!";
             request.setAttribute("message", message);
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/SavingMessage.jsp");
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/auxJSPs/VendaSavingMessage.jsp");
             rd.forward(request, response);
         }
     }

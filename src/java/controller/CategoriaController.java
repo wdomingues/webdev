@@ -56,7 +56,7 @@ public class CategoriaController extends HttpServlet {
             case "get":
                 myCategories = categoriaDAO.getAll();
                 request.setAttribute("myCategories", myCategories);
-                RequestDispatcher show = getServletContext().getRequestDispatcher("/ListaCategoriasView.jsp");
+                RequestDispatcher show = getServletContext().getRequestDispatcher("/views/ListaCategoriasView.jsp");
                 show.forward(request, response);
                 break;
 
@@ -65,7 +65,7 @@ public class CategoriaController extends HttpServlet {
                 category.setNomeCategoria("");
 
                 request.setAttribute("category", category);
-                RequestDispatcher insert = getServletContext().getRequestDispatcher("/FormCategoria.jsp");
+                RequestDispatcher insert = getServletContext().getRequestDispatcher("/forms/FormCategoria.jsp");
                 insert.forward(request, response);
                 break;
 
@@ -75,12 +75,12 @@ public class CategoriaController extends HttpServlet {
 
                 if (category.getId() > 0) {
                     request.setAttribute("category", category);
-                    RequestDispatcher rs = request.getRequestDispatcher("FormCategoria.jsp");
+                    RequestDispatcher rs = request.getRequestDispatcher("/forms/FormCategoria.jsp");
                     rs.forward(request, response);
                 } else {
                     String message = "Erro ao salvar categoria!";
                     request.setAttribute("message", message);
-                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/SavingMessage.jsp");
+                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/auxJSPs/CategoriaSavingMessage.jsp");
                     rd.forward(request, response);
                 }
                 break;
@@ -92,7 +92,7 @@ public class CategoriaController extends HttpServlet {
 
                 myCategories = categoriaDAO.getAll();
                 request.setAttribute("myCategories", myCategories);
-                RequestDispatcher listAfterDeleting = getServletContext().getRequestDispatcher("/ListaCategoriasView.jsp");
+                RequestDispatcher listAfterDeleting = getServletContext().getRequestDispatcher("/views/ListaCategoriasView.jsp");
                 listAfterDeleting.forward(request, response);
                 break;
         }
@@ -125,13 +125,13 @@ public class CategoriaController extends HttpServlet {
             }
 
             request.setAttribute("message", message);
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/SavingMessage.jsp");
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/auxJSPs/CategoriaSavingMessage.jsp");
             rd.forward(request, response);
 
         } catch (Exception e) {
             message = "Erro ao salvar categoria!";
             request.setAttribute("message", message);
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/SavingMessage.jsp");
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/auxJSPs/CategoriaSavingMessage.jsp");
             rd.forward(request, response);
         }
     }

@@ -37,9 +37,9 @@ public class FuncionarioDAO extends HttpServlet {
      */
     
     private Connection connection;
-    private static final String TABLE = "funcionario";
+    private static final String TABLE = "funcionarios";
     private static final String TABLEATTRIBUTES = 
-        "id, nome, senha, papel";
+        "nome, senha, papel";
             
     public FuncionarioDAO() {
         try {
@@ -94,13 +94,21 @@ public class FuncionarioDAO extends HttpServlet {
     
     public boolean put(Funcionario employee) {
         try {
-            String sql;
+           String sql;
             List<String> attribList = Arrays.asList(TABLEATTRIBUTES.trim().split(","));
-            attribList.forEach((p) -> { p = p+"=?"; });
+            
+            String parameters = "", paramVars = "" ;
+            for (String attrib : attribList){
+                parameters += attrib+"=?, ";
+                paramVars += "?,";
+            }
+            parameters = parameters.substring(0, parameters.length()-2);
+            paramVars = "(" + paramVars.substring(0, paramVars.length()-1) + ")";
+                
             if (employee.getId() == 0) {
-                sql = "INSERT INTO " + TABLE + " (" +  TABLEATTRIBUTES + ") VALUES (?,?)";
+                sql = "INSERT INTO " + TABLE + " (" +  TABLEATTRIBUTES + ") VALUES" + paramVars;
             } else {
-                sql = "UPDATE " + TABLE + " SET " + attribList.toString() + " WHERE id=?";
+                sql = "UPDATE " + TABLE + " SET " + parameters + " WHERE id=?";
             }
             
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -110,7 +118,7 @@ public class FuncionarioDAO extends HttpServlet {
             ps.setString(4, employee.getPapel());
            
             if (employee.getId()> 0)
-                ps.setInt(attribList.size(), employee.getId());
+                ps.setInt(attribList.size()+1, employee.getId());
             
             ps.execute();
             return true;

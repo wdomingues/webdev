@@ -56,7 +56,7 @@ public class ClienteController extends HttpServlet {
             case "get":
                 myClients = clienteDAO.getAll();
                 request.setAttribute("myClients", myClients);
-                RequestDispatcher show = getServletContext().getRequestDispatcher("/ListaClientesView.jsp");
+                RequestDispatcher show = getServletContext().getRequestDispatcher("/views/ListaClientesView.jsp");
                 show.forward(request, response);
                 break;
 
@@ -73,7 +73,7 @@ public class ClienteController extends HttpServlet {
                 client.setEmail("");
 
                 request.setAttribute("client", client);
-                RequestDispatcher insert = getServletContext().getRequestDispatcher("/FormCliente.jsp");
+                RequestDispatcher insert = getServletContext().getRequestDispatcher("/forms/FormCliente.jsp");
                 insert.forward(request, response);
                 break;
 
@@ -89,7 +89,7 @@ public class ClienteController extends HttpServlet {
                 } else {
                     String message = "Erro ao salvar cliente!";
                     request.setAttribute("message", message);
-                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/SavingMessage.jsp");
+                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/auxJSPs/ClienteSavingMessage.jsp");
                     rd.forward(request, response);
                 }
                 break;
@@ -101,7 +101,7 @@ public class ClienteController extends HttpServlet {
 
                 myClients = clienteDAO.getAll();
                 request.setAttribute("myClients", myClients);
-                RequestDispatcher listAfterDeleting = getServletContext().getRequestDispatcher("/ListaClientesView.jsp");
+                RequestDispatcher listAfterDeleting = getServletContext().getRequestDispatcher("/views/ListaClientesView.jsp");
                 listAfterDeleting.forward(request, response);
                 break;
         }
@@ -142,13 +142,13 @@ public class ClienteController extends HttpServlet {
             }
 
             request.setAttribute("message", message);
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/SavingMessage.jsp");
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/auxJSPs/ClienteSavingMessage.jsp");
             rd.forward(request, response);
 
         } catch (Exception e) {
             message = "Erro ao salvar cliente!";
             request.setAttribute("message", message);
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/SavingMessage.jsp");
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/auxJSPs/ClienteSavingMessage.jsp");
             rd.forward(request, response);
         }
     }

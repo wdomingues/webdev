@@ -37,9 +37,9 @@ public class FornecedorDAO extends HttpServlet {
      */
     
     private Connection connection;
-    private static final String TABLE = "fornecedor";
+    private static final String TABLE = "fornecedores";
     private static final String TABLEATTRIBUTES = 
-        "id, razao_social, cnpj, endereco, bairro, cidade, uf, cep, telefone, email";
+        "razao_social, cnpj, endereco, bairro, cidade, uf, cep, telefone, email";
             
     public FornecedorDAO() {
         try {
@@ -106,11 +106,19 @@ public class FornecedorDAO extends HttpServlet {
         try {
             String sql;
             List<String> attribList = Arrays.asList(TABLEATTRIBUTES.trim().split(","));
-            attribList.forEach((p) -> { p = p+"=?"; });
+            
+            String parameters = "", paramVars = "" ;
+            for (String attrib : attribList){
+                parameters += attrib+"=?, ";
+                paramVars += "?,";
+            }
+            parameters = parameters.substring(0, parameters.length()-2);
+            paramVars = "(" + paramVars.substring(0, paramVars.length()-1) + ")";
+                
             if (supplier.getId() == 0) {
-                sql = "INSERT INTO " + TABLE + " (" +  TABLEATTRIBUTES + ") VALUES (?,?)";
+                sql = "INSERT INTO " + TABLE + " (" +  TABLEATTRIBUTES + ") VALUES" + paramVars;
             } else {
-                sql = "UPDATE " + TABLE + " SET " + attribList.toString() + " WHERE id=?";
+                sql = "UPDATE " + TABLE + " SET " + parameters + " WHERE id=?";
             }
             
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -125,7 +133,7 @@ public class FornecedorDAO extends HttpServlet {
             ps.setString(9, supplier.getEmail());
            
             if (supplier.getId()> 0)
-                ps.setInt(attribList.size(), supplier.getId());
+                ps.setInt(attribList.size()+1, supplier.getId());
             
             ps.execute();
             return true;

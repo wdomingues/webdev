@@ -56,7 +56,7 @@ public class FuncionarioController extends HttpServlet {
             case "get":
                 myEmployees = funcionarioDAO.getAll();
                 request.setAttribute("myEmployees", myEmployees);
-                RequestDispatcher show = getServletContext().getRequestDispatcher("/ListaFuncionariosView.jsp");
+                RequestDispatcher show = getServletContext().getRequestDispatcher("/views/ListaFuncionariosView.jsp");
                 show.forward(request, response);
                 break;
 
@@ -68,7 +68,7 @@ public class FuncionarioController extends HttpServlet {
                 employee.setPapel("");
 
                 request.setAttribute("employee", employee);
-                RequestDispatcher insert = getServletContext().getRequestDispatcher("/FormFuncionario.jsp");
+                RequestDispatcher insert = getServletContext().getRequestDispatcher("/forms/FormFuncionario.jsp");
                 insert.forward(request, response);
                 break;
 
@@ -79,12 +79,12 @@ public class FuncionarioController extends HttpServlet {
 
                 if (employee.getId() > 0) {
                     request.setAttribute("employee", employee);
-                    RequestDispatcher rs = request.getRequestDispatcher("FormFuncionario.jsp");
+                    RequestDispatcher rs = request.getRequestDispatcher("/forms/FormFuncionario.jsp");
                     rs.forward(request, response);
                 } else {
                     String message = "Erro ao salvar funcionario!";
                     request.setAttribute("message", message);
-                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/SavingMessage.jsp");
+                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/auxJSPs/FuncionarioSavingMessage.jsp");
                     rd.forward(request, response);
                 }
                 break;
@@ -96,7 +96,7 @@ public class FuncionarioController extends HttpServlet {
 
                 myEmployees = funcionarioDAO.getAll();
                 request.setAttribute("myEmployees", myEmployees);
-                RequestDispatcher listAfterDeleting = getServletContext().getRequestDispatcher("/ListaFuncionariosView.jsp");
+                RequestDispatcher listAfterDeleting = getServletContext().getRequestDispatcher("/views/ListaFuncionariosView.jsp");
                 listAfterDeleting.forward(request, response);
                 break;
         }
@@ -132,13 +132,13 @@ public class FuncionarioController extends HttpServlet {
             }
 
             request.setAttribute("message", message);
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/SavingMessage.jsp");
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/auxJSPs/FuncionarioSavingMessage.jsp");
             rd.forward(request, response);
 
         } catch (Exception e) {
             message = "Erro ao salvar funcionario!";
             request.setAttribute("message", message);
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/SavingMessage.jsp");
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/auxJSPs/FuncionarioSavingMessage.jsp");
             rd.forward(request, response);
         }
     }

@@ -37,10 +37,10 @@ public class ProdutoDAO extends HttpServlet {
      */
     
     private Connection connection;
-    private static final String TABLE = "produto";
+    private static final String TABLE = "produtos";
     private static final String TABLEATTRIBUTES = 
-        "id, nome_produto, descricao, preco_compra, , "
-            + "quantidade_disponivel, liberado_venda, id_categoria";
+        "nome_produto, descricao, preco_compra, preco_venda, "
+            + "quantidade_disponível, liberado_venda, id_categoria";
             
     public ProdutoDAO() {
         try {
@@ -63,7 +63,7 @@ public class ProdutoDAO extends HttpServlet {
                 product.setDescricao(rs.getString("descricao"));
                 product.setPrecoCompra(rs.getFloat("preco_compra"));
                 product.setPrecoVenda(rs.getFloat("preco_venda"));
-                product.setQuantidadeDisponivel(rs.getInt("quantidade_disponivel"));
+                product.setQuantidadeDisponivel(rs.getInt("quantidade_disponível"));
                 product.setLiberadoVenda(rs.getString("liberado_venda"));
                 product.setIdCategoria(rs.getInt("id_categoria"));
 
@@ -89,7 +89,7 @@ public class ProdutoDAO extends HttpServlet {
                 product.setDescricao(rs.getString("descricao"));
                 product.setPrecoCompra(rs.getFloat("preco_compra"));
                 product.setPrecoVenda(rs.getFloat("preco_venda"));
-                product.setQuantidadeDisponivel(rs.getInt("quantidade_disponivel"));
+                product.setQuantidadeDisponivel(rs.getInt("quantidade_disponível"));
                 product.setLiberadoVenda(rs.getString("liberado_venda"));
                 product.setIdCategoria(rs.getInt("id_categoria"));
             }
@@ -103,11 +103,19 @@ public class ProdutoDAO extends HttpServlet {
         try {
             String sql;
             List<String> attribList = Arrays.asList(TABLEATTRIBUTES.trim().split(","));
-            attribList.forEach((p) -> { p = p+"=?"; });
+            
+            String parameters = "", paramVars = "" ;
+            for (String attrib : attribList){
+                parameters += attrib+"=?, ";
+                paramVars += "?,";
+            }
+            parameters = parameters.substring(0, parameters.length()-2);
+            paramVars = "(" + paramVars.substring(0, paramVars.length()-1) + ")";
+                
             if (product.getId() == 0) {
-                sql = "INSERT INTO " + TABLE + " (" +  TABLEATTRIBUTES + ") VALUES (?,?)";
+                sql = "INSERT INTO " + TABLE + " (" +  TABLEATTRIBUTES + ") VALUES" + paramVars;
             } else {
-                sql = "UPDATE " + TABLE + " SET " + attribList.toString() + " WHERE id=?";
+                sql = "UPDATE " + TABLE + " SET " + parameters + " WHERE id=?";
             }
             
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -120,7 +128,7 @@ public class ProdutoDAO extends HttpServlet {
             ps.setInt(7, product.getIdCategoria());
            
             if (product.getId()> 0)
-                ps.setInt(attribList.size(), product.getId());
+                ps.setInt(attribList.size()+1, product.getId());
             
             ps.execute();
             return true;
@@ -142,6 +150,4 @@ public class ProdutoDAO extends HttpServlet {
             return false;
         }
     }
-    
-    
 }

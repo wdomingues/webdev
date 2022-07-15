@@ -6,7 +6,11 @@
 package controller;
 
 
+import application.Categoria;
+import application.Cliente;
+import application.Funcionario;
 import application.Produto;
+import application.Venda;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,7 +20,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.CategoriaDAO;
+import model.ClienteDAO;
+import model.FuncionarioDAO;
 import model.ProdutoDAO;
+import model.VendaDAO;
 
 /**
  *
@@ -48,6 +56,8 @@ public class ProdutoController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ProdutoDAO produtoDAO = new ProdutoDAO();
+        CategoriaDAO categoriaDAO = new CategoriaDAO();
+        ArrayList<Categoria> myCategories;
         String option = (String) request.getParameter("option");
         int id;
         ArrayList<Produto> myProducts;
@@ -57,10 +67,12 @@ public class ProdutoController extends HttpServlet {
             case "get":
                 myProducts = produtoDAO.getAll();
                 request.setAttribute("myProducts", myProducts);
-                RequestDispatcher show = getServletContext().getRequestDispatcher("/ListaProdutosView.jsp");
+                myCategories = categoriaDAO.getAll();
+                request.setAttribute("myCategories", myCategories);
+                RequestDispatcher show = getServletContext().getRequestDispatcher("/views/ListaProdutosView.jsp");
                 show.forward(request, response);
                 break;
-
+                
             case "insert":
                 product.setId(0);
                 product.setNomeProduto("");
@@ -72,7 +84,7 @@ public class ProdutoController extends HttpServlet {
                 product.setIdCategoria(0);
 
                 request.setAttribute("product", product);
-                RequestDispatcher insert = getServletContext().getRequestDispatcher("/FormProduto.jsp");
+                RequestDispatcher insert = getServletContext().getRequestDispatcher("/forms/FormProduto.jsp");
                 insert.forward(request, response);
                 break;
 
@@ -83,12 +95,12 @@ public class ProdutoController extends HttpServlet {
 
                 if (product.getId() > 0) {
                     request.setAttribute("product", product);
-                    RequestDispatcher rs = request.getRequestDispatcher("FormProduto.jsp");
+                    RequestDispatcher rs = request.getRequestDispatcher("/forms/FormProduto.jsp");
                     rs.forward(request, response);
                 } else {
                     String message = "Erro ao salvar produto!";
                     request.setAttribute("message", message);
-                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/SavingMessage.jsp");
+                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/auxJSPs/ProdutoSavingMessage.jsp");
                     rd.forward(request, response);
                 }
                 break;
@@ -100,7 +112,7 @@ public class ProdutoController extends HttpServlet {
 
                 myProducts = produtoDAO.getAll();
                 request.setAttribute("myProducts", myProducts);
-                RequestDispatcher listAfterDeleting = getServletContext().getRequestDispatcher("/ListaProdutosView.jsp");
+                RequestDispatcher listAfterDeleting = getServletContext().getRequestDispatcher("/views/ListaProdutosView.jsp");
                 listAfterDeleting.forward(request, response);
                 break;
         }
@@ -140,13 +152,13 @@ public class ProdutoController extends HttpServlet {
             }
 
             request.setAttribute("message", message);
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/SavingMessage.jsp");
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/auxJSPs/ProdutoSavingMessage.jsp");
             rd.forward(request, response);
 
         } catch (Exception e) {
             message = "Erro ao salvar produto!";
             request.setAttribute("message", message);
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/SavingMessage.jsp");
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/auxJSPs/ProdutoSavingMessage.jsp");
             rd.forward(request, response);
         }
     }

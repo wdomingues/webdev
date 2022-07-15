@@ -56,7 +56,7 @@ public class FornecedorController extends HttpServlet {
             case "get":
                 mySuppliers = fornecedorDAO.getAll();
                 request.setAttribute("mySuppliers", mySuppliers);
-                RequestDispatcher show = getServletContext().getRequestDispatcher("/ListaFornecedoresView.jsp");
+                RequestDispatcher show = getServletContext().getRequestDispatcher("/views/ListaFornecedoresView.jsp");
                 show.forward(request, response);
                 break;
 
@@ -73,7 +73,7 @@ public class FornecedorController extends HttpServlet {
                 supplier.setEmail("");
 
                 request.setAttribute("supplier", supplier);
-                RequestDispatcher insert = getServletContext().getRequestDispatcher("/FormFornecedor.jsp");
+                RequestDispatcher insert = getServletContext().getRequestDispatcher("/forms/FormFornecedor.jsp");
                 insert.forward(request, response);
                 break;
 
@@ -84,12 +84,12 @@ public class FornecedorController extends HttpServlet {
 
                 if (supplier.getId() > 0) {
                     request.setAttribute("supplier", supplier);
-                    RequestDispatcher rs = request.getRequestDispatcher("FormFornecedor.jsp");
+                    RequestDispatcher rs = request.getRequestDispatcher("/forms/FormFornecedor.jsp");
                     rs.forward(request, response);
                 } else {
                     String message = "Erro ao salvar fornecedor!";
                     request.setAttribute("message", message);
-                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/SavingMessage.jsp");
+                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/auxJSPs/FornecedorSavingMessage.jsp");
                     rd.forward(request, response);
                 }
                 break;
@@ -101,7 +101,7 @@ public class FornecedorController extends HttpServlet {
 
                 mySuppliers = fornecedorDAO.getAll();
                 request.setAttribute("mySuppliers", mySuppliers);
-                RequestDispatcher listAfterDeleting = getServletContext().getRequestDispatcher("/ListaFornecedoresView.jsp");
+                RequestDispatcher listAfterDeleting = getServletContext().getRequestDispatcher("/views/ListaFornecedoresView.jsp");
                 listAfterDeleting.forward(request, response);
                 break;
         }
@@ -142,13 +142,13 @@ public class FornecedorController extends HttpServlet {
             }
 
             request.setAttribute("message", message);
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/SavingMessage.jsp");
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/auxJSPs/FornecedorSavingMessage.jsp");
             rd.forward(request, response);
 
         } catch (Exception e) {
             message = "Erro ao salvar fornecedor!";
             request.setAttribute("message", message);
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/SavingMessage.jsp");
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/auxJSPs/FornecedorSavingMessage.jsp");
             rd.forward(request, response);
         }
     }

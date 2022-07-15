@@ -38,9 +38,9 @@ public class CompraDAO extends HttpServlet {
      */
     
     private Connection connection;
-    private static final String TABLE = "compra";
+    private static final String TABLE = "compras";
     private static final String TABLEATTRIBUTES = 
-        "id, quantidade_compra, data_compra, valor_compra, "
+        "quantidade_compra, data_compra, valor_compra, "
             + "id_fornecedor, id_produto, id_funcionario";
             
     public CompraDAO() {
@@ -58,7 +58,7 @@ public class CompraDAO extends HttpServlet {
     }
     private float convertInt2Float(int i){
         if (i == 0) return 0f;
-        return i / 100f;
+        return i * 1f;
     }
     
     
@@ -112,11 +112,19 @@ public class CompraDAO extends HttpServlet {
         try {
             String sql;
             List<String> attribList = Arrays.asList(TABLEATTRIBUTES.trim().split(","));
-            attribList.forEach((p) -> { p = p+"=?"; });
+            
+            String parameters = "", paramVars = "" ;
+            for (String attrib : attribList){
+                parameters += attrib+"=?, ";
+                paramVars += "?,";
+            }
+            parameters = parameters.substring(0, parameters.length()-2);
+            paramVars = "(" + paramVars.substring(0, paramVars.length()-1) + ")";
+            
             if (product.getId() == 0) {
-                sql = "INSERT INTO " + TABLE + " (" +  TABLEATTRIBUTES + ") VALUES (?,?)";
+                sql = "INSERT INTO " + TABLE + " (" +  TABLEATTRIBUTES + ") VALUES" + paramVars;
             } else {
-                sql = "UPDATE " + TABLE + " SET " + attribList.toString() + " WHERE id=?";
+                sql = "UPDATE " + TABLE + " SET " + parameters + " WHERE id=?";
             }
             
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -128,7 +136,7 @@ public class CompraDAO extends HttpServlet {
             ps.setInt(6, product.getIdFuncionario());
            
             if (product.getId()> 0)
-                ps.setInt(attribList.size(), product.getId());
+                ps.setInt(attribList.size()+1, product.getId());
             
             ps.execute();
             return true;

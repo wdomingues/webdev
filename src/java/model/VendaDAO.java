@@ -38,9 +38,9 @@ public class VendaDAO extends HttpServlet {
      */
     
     private Connection connection;
-    private static final String TABLE = "venda";
+    private static final String TABLE = "vendas";
     private static final String TABLEATTRIBUTES = 
-        "id, quantidade_venda, data_venda, valor_venda, "
+        "quantidade_venda, data_venda, valor_venda, "
             + "id_cliente, id_produto, id_funcionario";
             
     public VendaDAO() {
@@ -102,11 +102,19 @@ public class VendaDAO extends HttpServlet {
         try {
             String sql;
             List<String> attribList = Arrays.asList(TABLEATTRIBUTES.trim().split(","));
-            attribList.forEach((p) -> { p = p+"=?"; });
+            
+            String parameters = "", paramVars = "" ;
+            for (String attrib : attribList){
+                parameters += attrib+"=?, ";
+                paramVars += "?,";
+            }
+            parameters = parameters.substring(0, parameters.length()-2);
+            paramVars = "(" + paramVars.substring(0, paramVars.length()-1) + ")";
+                
             if (venda.getId() == 0) {
-                sql = "INSERT INTO " + TABLE + " (" +  TABLEATTRIBUTES + ") VALUES (?,?)";
+                sql = "INSERT INTO " + TABLE + " (" +  TABLEATTRIBUTES + ") VALUES" + paramVars;
             } else {
-                sql = "UPDATE " + TABLE + " SET " + attribList.toString() + " WHERE id=?";
+                sql = "UPDATE " + TABLE + " SET " + parameters + " WHERE id=?";
             }
             
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -118,7 +126,7 @@ public class VendaDAO extends HttpServlet {
             ps.setInt(6, venda.getIdFuncionario());
            
             if (venda.getId()> 0)
-                ps.setInt(attribList.size(), venda.getId());
+                ps.setInt(attribList.size()+1, venda.getId());
             
             ps.execute();
             return true;

@@ -7,6 +7,9 @@ package controller;
 
 
 import application.Compra;
+import application.Fornecedor;
+import application.Funcionario;
+import application.Produto;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,6 +20,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.CompraDAO;
+import model.FornecedorDAO;
+import model.ProdutoDAO;
+import model.FuncionarioDAO;
+
 
 /**
  *
@@ -48,17 +55,34 @@ public class CompraController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         CompraDAO compraDAO = new CompraDAO();
+        FornecedorDAO fornecedorDAO = new FornecedorDAO();
+        ProdutoDAO produtoDAO = new ProdutoDAO();
+        FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+        
         String option = (String) request.getParameter("option");
         int id;
         ArrayList<Compra> myCompras;
+        ArrayList<Fornecedor> mySuppliers;
+        ArrayList<Produto> myProducts;
+        ArrayList<Funcionario> myEmployees;
+
         Compra compra = new Compra();
+        
+        mySuppliers = fornecedorDAO.getAll();
+        myProducts = produtoDAO.getAll();
+        myEmployees = funcionarioDAO.getAll();
+        request.setAttribute("mySuppliers", mySuppliers);
+        request.setAttribute("myProducts", myProducts);
+        request.setAttribute("myEmployees", myEmployees);
         
         switch (option) {
             case "get":
                 myCompras = compraDAO.getAll();
                 request.setAttribute("myCompras", myCompras);
-                RequestDispatcher show = getServletContext().getRequestDispatcher("/ListaComprasView.jsp");
+                RequestDispatcher show = getServletContext().getRequestDispatcher("/views/ListaComprasView.jsp");
                 show.forward(request, response);
+//                RequestDispatcher showForm = getServletContext().getRequestDispatcher("/forms/FormCompra.jsp");
+//                showForm.forward(request, response);
                 break;
 
             case "insert":
@@ -71,7 +95,7 @@ public class CompraController extends HttpServlet {
                 compra.setIdFuncionario(0);
 
                 request.setAttribute("compra", compra);
-                RequestDispatcher insert = getServletContext().getRequestDispatcher("/FormCompra.jsp");
+                RequestDispatcher insert = getServletContext().getRequestDispatcher("/forms/FormCompra.jsp");
                 insert.forward(request, response);
                 break;
 
@@ -82,12 +106,12 @@ public class CompraController extends HttpServlet {
 
                 if (compra.getId() > 0) {
                     request.setAttribute("compra", compra);
-                    RequestDispatcher rs = request.getRequestDispatcher("FormCompra.jsp");
+                    RequestDispatcher rs = request.getRequestDispatcher("/forms/FormCompra.jsp");
                     rs.forward(request, response);
                 } else {
                     String message = "Erro ao salvar compra!";
                     request.setAttribute("message", message);
-                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/SavingMessage.jsp");
+                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/auxJSPs/CompraSavingMessage.jsp");
                     rd.forward(request, response);
                 }
                 break;
@@ -99,7 +123,7 @@ public class CompraController extends HttpServlet {
 
                 myCompras = compraDAO.getAll();
                 request.setAttribute("myCompras", myCompras);
-                RequestDispatcher listAfterDeleting = getServletContext().getRequestDispatcher("/ListaComprasView.jsp");
+                RequestDispatcher listAfterDeleting = getServletContext().getRequestDispatcher("/views/ListaComprasView.jsp");
                 listAfterDeleting.forward(request, response);
                 break;
         }
@@ -138,13 +162,13 @@ public class CompraController extends HttpServlet {
             }
 
             request.setAttribute("message", message);
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/SavingMessage.jsp");
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/auxJSPs/CompraSavingMessage.jsp");
             rd.forward(request, response);
 
         } catch (Exception e) {
             message = "Compra salva com sucesso!";
             request.setAttribute("message", message);
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/SavingMessage.jsp");
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/auxJSPs/CompraSavingMessage.jsp");
             rd.forward(request, response);
         }
     }
