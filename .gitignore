@@ -6,4 +6,6 @@
 bin/
 out/
 target/
-/DevWeb/nbproject/private/
+nbproject/private/
+dist/
+build/
