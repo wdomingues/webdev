@@ -57,18 +57,21 @@ public class ProdutoController extends HttpServlet {
             throws ServletException, IOException {
         ProdutoDAO produtoDAO = new ProdutoDAO();
         CategoriaDAO categoriaDAO = new CategoriaDAO();
-        ArrayList<Categoria> myCategories;
         String option = (String) request.getParameter("option");
         int id;
+        ArrayList<Categoria> myCategories;
         ArrayList<Produto> myProducts;
+        
         Produto product = new Produto();
+        
+        myCategories = categoriaDAO.getAll();
+        request.setAttribute("myCategories", myCategories);
+
         
         switch (option) {
             case "get":
                 myProducts = produtoDAO.getAll();
                 request.setAttribute("myProducts", myProducts);
-                myCategories = categoriaDAO.getAll();
-                request.setAttribute("myCategories", myCategories);
                 RequestDispatcher show = getServletContext().getRequestDispatcher("/views/ListaProdutosView.jsp");
                 show.forward(request, response);
                 break;

@@ -61,6 +61,7 @@ public class CompraController extends HttpServlet {
         
         String option = (String) request.getParameter("option");
         int id;
+        
         ArrayList<Compra> myCompras;
         ArrayList<Fornecedor> mySuppliers;
         ArrayList<Produto> myProducts;
@@ -88,7 +89,7 @@ public class CompraController extends HttpServlet {
             case "insert":
                 compra.setId(0);
                 compra.setQuantidadeCompra(0);
-                compra.setDataCompra(new Date(00/00/0000));
+                compra.setDataCompra(new Date(0));
                 compra.setValorCompra(0f);
                 compra.setIdFornecedor(0);
                 compra.setIdProduto(0);

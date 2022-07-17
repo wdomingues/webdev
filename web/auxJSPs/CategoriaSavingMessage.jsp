@@ -24,7 +24,7 @@
                 </div>
 
                 <p></p>
-                <div><a href="ProdutoController?option=get">Voltar</a></div>
+                <div><a href="CategoriaController?option=get">Voltar</a></div>
             </div>
         </div>
 

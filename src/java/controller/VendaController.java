@@ -23,7 +23,7 @@ import model.VendaDAO;
 import model.FuncionarioDAO;
 import model.ProdutoDAO;
 import model.ClienteDAO;
-
+import java.lang.Integer;
 
 /**
  *
@@ -58,32 +58,35 @@ public class VendaController extends HttpServlet {
         ClienteDAO clienteDAO = new ClienteDAO();
         ProdutoDAO produtoDAO = new ProdutoDAO();
         FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+        
+        String option = (String) request.getParameter("option");
+        int id;
+                
+        ArrayList<Venda> myVendas;
         ArrayList<Cliente> myClients;
         ArrayList<Produto> myProducts;
         ArrayList<Funcionario> myEmployees;
-        String option = (String) request.getParameter("option");
-        int id;
-        ArrayList<Venda> myVendas;
 
         Venda venda = new Venda();
         
+        myClients = clienteDAO.getAll();
+        myProducts = produtoDAO.getAll();
+        myEmployees = funcionarioDAO.getAll();
+        request.setAttribute("myClients", myClients);
+        request.setAttribute("myProducts", myProducts);
+        request.setAttribute("myEmployees", myEmployees);
+                
         switch (option) {
             case "get":
                 myVendas = vendaDAO.getAll();
-                myClients = clienteDAO.getAll();
-                myProducts = produtoDAO.getAll();
-                myEmployees = funcionarioDAO.getAll();
                 request.setAttribute("myVendas", myVendas);
-                request.setAttribute("myClients", myClients);
-                request.setAttribute("myProducts", myProducts);
-                request.setAttribute("myEmployees", myEmployees);
                 RequestDispatcher show = getServletContext().getRequestDispatcher("/views/ListaVendasView.jsp");
                 show.forward(request, response);
                 break;
             case "insert":
                 venda.setId(0);
                 venda.setQuantidadeVenda(0);
-                venda.setDataVenda(new Date(00/00/0000));
+                venda.setDataVenda(new Date(0));
                 venda.setValorVenda(0f);
                 venda.setIdCliente(0);
                 venda.setIdProduto(0);
@@ -139,10 +142,12 @@ public class VendaController extends HttpServlet {
         String message;
         try {
             Venda venda = new Venda();
-
+            
+            String[] dataArr = request.getParameter("data_venda").split(",");
+            
             venda.setId(Integer.parseInt(request.getParameter("id")));
             venda.setQuantidadeVenda(Integer.parseInt(request.getParameter("quantidade_venda")));
-            venda.setDataVenda(new Date(request.getParameter("data_venda")));
+            venda.setDataVenda(new Date(Integer.parseInt(dataArr[2]),Integer.parseInt(dataArr[1]),Integer.parseInt(dataArr[0])));
             venda.setValorVenda(Float.parseFloat(request.getParameter("valor_venda")));
             venda.setIdCliente(Integer.parseInt(request.getParameter("id_cliente")));
             venda.setIdProduto(Integer.parseInt(request.getParameter("id_produto")));
