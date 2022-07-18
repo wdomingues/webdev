@@ -107,7 +107,7 @@ public class VendaController extends HttpServlet {
                     RequestDispatcher rs = request.getRequestDispatcher("/forms/FormVenda.jsp");
                     rs.forward(request, response);
                 } else {
-                    String message = "Erroao salvar venda!";
+                    String message = "Erro ao salvar venda!";
                     request.setAttribute("message", message);
                     RequestDispatcher rd = getServletContext().getRequestDispatcher("/auxJSPs/VendaSavingMessage.jsp");
                     rd.forward(request, response);

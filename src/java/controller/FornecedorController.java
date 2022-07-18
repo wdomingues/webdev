@@ -123,8 +123,8 @@ public class FornecedorController extends HttpServlet {
         try {
             Fornecedor supplier = new Fornecedor();
             supplier.setId(Integer.parseInt(request.getParameter("id")));
-            supplier.setNome(request.getParameter("nome"));
-            supplier.setDocumento(request.getParameter("documento"));
+            supplier.setNome(request.getParameter("razao_social"));
+            supplier.setDocumento(request.getParameter("cnpj"));
             supplier.setEndereco(request.getParameter("endereco"));
             supplier.setBairro(request.getParameter("bairro"));
             supplier.setCidade(request.getParameter("cidade"));

@@ -84,7 +84,7 @@ public class ClienteController extends HttpServlet {
 
                 if (client.getId() > 0) {
                     request.setAttribute("client", client);
-                    RequestDispatcher rs = request.getRequestDispatcher("FormCliente.jsp");
+                    RequestDispatcher rs = request.getRequestDispatcher("/forms/FormCliente.jsp");
                     rs.forward(request, response);
                 } else {
                     String message = "Erro ao salvar cliente!";
@@ -124,7 +124,7 @@ public class ClienteController extends HttpServlet {
             Cliente client = new Cliente();
             client.setId(Integer.parseInt(request.getParameter("id")));
             client.setNome(request.getParameter("nome"));
-            client.setDocumento(request.getParameter("documento"));
+            client.setDocumento(request.getParameter("cpf"));
             client.setEndereco(request.getParameter("endereco"));
             client.setBairro(request.getParameter("bairro"));
             client.setCidade(request.getParameter("cidade"));

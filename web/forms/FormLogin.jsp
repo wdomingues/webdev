@@ -4,14 +4,50 @@
     Author     : winne
 --%>
 
+<%@page import="application.Funcionario, java.lang.String, java.lang.Integer, java.util.ArrayList" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="pt-BR">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <%@include file="../auxJSPs/Header.html" %>
+        <title>Login</title>
     </head>
+
     <body>
-        <h1>Hello World!</h1>
+        <%@include file="../auxJSPs/NavBar.html" %>
+        <%
+            ArrayList<Funcionario> employees = (ArrayList<Funcionario>) request.getAttribute("myEmployees");
+
+            Funcionario employee = (Funcionario)request.getAttribute("employee");
+            int id = employee.getId();
+            String cpf = employee.getDocumento();
+            String senha = employee.getSenha();
+        %>
+        
+        <div class="forms">
+            <h2 class="m-5">
+                Entrar na sua conta
+            </h2>
+
+            <div>
+                <form method="POST" action="FuncionarioController" name="login" id="login">
+                    <div class="mb-4">
+                        <label for="cpf-login" class="form-label">CPF:</label>
+                        <input type="text" class="form-control" id="cpf-login" name="cpf" value="<%= cpf %>" required size="14" placeholder="999.999.999-00"/>
+                    </div>
+                    <div class="mb-4">
+                        <label for="senha-login" class="form-label">Senha:</label>
+                        <input type="password" class="form-control" id="senha-login" name="senha" value="<%= senha %>" required size="10"/>
+                    </div>
+                    <div class="mb-4 center-horizontally">
+                        <button type="submit" class="btn btn-dark" id="login-button">Salvar</button>
+                    </div>
+                    
+                    <a href="FuncionarioController?option=get" class="btn btn-outline-danger">Voltar</a>
+                </form>
+            </div>
+        </div>
+        <%@include file="../auxJSPs/BasicScripts.html" %>
     </body>
 </html>
