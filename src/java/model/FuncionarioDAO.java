@@ -39,7 +39,7 @@ public class FuncionarioDAO extends HttpServlet {
     private Connection connection;
     private static final String TABLE = "funcionarios";
     private static final String TABLEATTRIBUTES = 
-        "nome, senha, papel";
+        "nome, cpf, senha, papel";
             
     public FuncionarioDAO() {
         try {
@@ -106,7 +106,7 @@ public class FuncionarioDAO extends HttpServlet {
             paramVars = "(" + paramVars.substring(0, paramVars.length()-1) + ")";
                 
             if (employee.getId() == 0) {
-                sql = "INSERT INTO " + TABLE + " (" +  TABLEATTRIBUTES + ") VALUES" + paramVars;
+                sql = "INSERT INTO " + TABLE + " (" +  TABLEATTRIBUTES + ") VALUES " + paramVars;
             } else {
                 sql = "UPDATE " + TABLE + " SET " + parameters + " WHERE id=?";
             }

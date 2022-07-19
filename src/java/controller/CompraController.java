@@ -11,6 +11,8 @@ import application.Fornecedor;
 import application.Funcionario;
 import application.Produto;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.servlet.RequestDispatcher;
@@ -145,10 +147,16 @@ public class CompraController extends HttpServlet {
         String message;
         try {
             Compra compra = new Compra();
+            String dataStr = request.getParameter("data_compra");
 
+            try {
+                Date data = new SimpleDateFormat("yyyy-MM-dd").parse(dataStr);
+                compra.setDataCompra(data);
+            } catch (ParseException e) {
+                throw new IllegalArgumentException(e);
+            }
             compra.setId(Integer.parseInt(request.getParameter("id")));
             compra.setQuantidadeCompra(Integer.parseInt(request.getParameter("quantidade_compra")));
-            compra.setDataCompra(new Date(request.getParameter("data_compra")));
             compra.setValorCompra(Float.parseFloat(request.getParameter("valor_compra")));
             compra.setIdFornecedor(Integer.parseInt(request.getParameter("id_fornecedor")));
             compra.setIdProduto(Integer.parseInt(request.getParameter("id_produto")));

@@ -74,7 +74,7 @@
                     
                     <div class="mb-4">
                         <label for="quantidade-venda" class="form-label">Quantidade:</label>
-                        <input type="text" class="form-control" id="quantidade-venda" name="quantidade_venda" value="<%= qtdVenda %>" required size="30" placeholder="Quantidade"/>
+                        <input type="number" class="form-control" id="quantidade-venda" name="quantidade_venda" value="<%= qtdVenda %>" required size="30" placeholder="Quantidade" step="1"/>
                     </div>
                     <div class="mb-4">
                         <label for="data-venda" class="form-label">Data da venda:</label>

@@ -35,7 +35,7 @@
                             <th scope="col">CEP</th>
                             <th scope="col">Telefone</th>
                             <th scope="col">e-mail</th>
-                            <th scope="col"><div class="float-right">Ações</div><br></th>
+                            <th scope="col"><div class="float-right">Ações</div></th>
                         </tr>
                     </thead> 
                     <tbody>

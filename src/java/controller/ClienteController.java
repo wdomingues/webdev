@@ -128,8 +128,8 @@ public class ClienteController extends HttpServlet {
             client.setEndereco(request.getParameter("endereco"));
             client.setBairro(request.getParameter("bairro"));
             client.setCidade(request.getParameter("cidade"));
-            client.setUf(request.getParameter("uf"));
-            client.setCep(request.getParameter("cep"));
+            client.setUf(request.getParameter("uf").substring(0,2));
+            client.setCep(request.getParameter("cep").replace("-", "").replace(".", ""));
             client.setTelefone(request.getParameter("telefone"));
             client.setEmail(request.getParameter("email"));
             

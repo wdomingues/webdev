@@ -24,7 +24,8 @@ import model.FuncionarioDAO;
 import model.ProdutoDAO;
 import model.ClienteDAO;
 import java.lang.Integer;
-
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 /**
  *
  * @author winne
@@ -143,12 +144,17 @@ public class VendaController extends HttpServlet {
         try {
             Venda venda = new Venda();
             
-            String[] dataArr = request.getParameter("data_venda").split(",");
+            String dataStr = request.getParameter("data_venda");
+            try {
+                Date data = new SimpleDateFormat("yyyy-MM-dd").parse(dataStr);
+                venda.setDataVenda(data);
+            } catch (ParseException e) {
+                throw new IllegalArgumentException(e);
+            }
             
             venda.setId(Integer.parseInt(request.getParameter("id")));
             venda.setQuantidadeVenda(Integer.parseInt(request.getParameter("quantidade_venda")));
-            venda.setDataVenda(new Date(Integer.parseInt(dataArr[2]),Integer.parseInt(dataArr[1]),Integer.parseInt(dataArr[0])));
-            venda.setValorVenda(Float.parseFloat(request.getParameter("valor_venda")));
+            venda.setValorVenda(Float.parseFloat(request.getParameter("valor_venda").replace(",", ".")));
             venda.setIdCliente(Integer.parseInt(request.getParameter("id_cliente")));
             venda.setIdProduto(Integer.parseInt(request.getParameter("id_produto")));
             venda.setIdFuncionario(Integer.parseInt(request.getParameter("id_funcionario")));

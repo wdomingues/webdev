@@ -19,6 +19,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Arrays;
 import java.util.List;
+import static utils.Validators.convertFloat2Int;
+import static utils.Validators.convertInt2Float;
 
 /**
  *
@@ -52,15 +54,6 @@ public class CompraDAO extends HttpServlet {
             System.out.println(e);
         }
     }
-    
-    private int convertFloat2Int(float f){
-        return Math.round (f * 100f);
-    }
-    private float convertInt2Float(int i){
-        if (i == 0) return 0f;
-        return i * 1f;
-    }
-    
     
     public ArrayList<Compra> getAll() {
         ArrayList<Compra> compras = new ArrayList<>();

@@ -27,7 +27,7 @@
                         <tr>
                             <th scope="col">Id</th>
                             <th scope="col">Nome da Categoria</th>
-                            <th scope="col"><div class="float-right">Ações</div><br></th>
+                            <th scope="col"><div class="float-right">Ações</div></th>
                         </tr>
                     </thead> 
                     <tbody>

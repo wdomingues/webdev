@@ -100,11 +100,11 @@
                     </div>
                     <div class="mb-4">
                         <label for="cep-cliente" class="form-label">CEP:</label>
-                        <input type="text" class="form-control" id="cep-cliente" name="cep" value="<%= cep %>" required size="30" placeholder="99.999-999"/>
+                        <input type="text" class="form-control" id="cep-cliente" name="cep" value="<%= cep %>" required size="30" placeholder="99.999-999" data-mask="00.000-000"/>
                     </div>
                     <div class="mb-4">
                         <label for="telefone-cliente" class="form-label">Telefone:</label>
-                        <input type="text" class="form-control" id="telefone-cliente" name="telefone" value="<%= telefone %>" required size="30" placeholder="(DD) 999 999 999"/>
+                        <input type="text" class="form-control" id="telefone-cliente" name="telefone" value="<%= telefone %>" required size="30" placeholder="(99) 999 999 999" data-mask="(00) 000 000 000"/>
                     </div>
                     <div class="mb-4">
                         <label for="email-cliente" class="form-label">e-mail:</label>

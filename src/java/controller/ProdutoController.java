@@ -140,8 +140,8 @@ public class ProdutoController extends HttpServlet {
             product.setId(Integer.parseInt(request.getParameter("id")));
             product.setNomeProduto(request.getParameter("nome_produto"));
             product.setDescricao(request.getParameter("descricao"));
-            product.setPrecoCompra(Float.parseFloat(request.getParameter("preco_compra")));
-            product.setPrecoVenda(Float.parseFloat(request.getParameter("preco_venda")));
+            product.setPrecoCompra(Float.parseFloat(request.getParameter("preco_compra").replace(",", ".")));
+            product.setPrecoVenda(Float.parseFloat(request.getParameter("preco_venda").replace(",", ".")));
             product.setQuantidadeDisponivel(Integer.parseInt(request.getParameter("quantidade_disponivel")));
             product.setLiberadoVenda(request.getParameter("liberado_venda"));
             product.setIdCategoria(Integer.parseInt(request.getParameter("id_categoria")));

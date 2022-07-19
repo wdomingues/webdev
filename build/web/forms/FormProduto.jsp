@@ -30,8 +30,8 @@
 
             String category = "";
             String selCat = "";
-            boolean libVendaS = false;
-            boolean libVendaN = false;
+            String libVendaS = "";
+            String libVendaN = "";
             int catId = 0;
             for(Categoria cat : categories){
                 if (cat.getId() == product.getIdCategoria()) { 
@@ -41,12 +41,15 @@
                 }
             }
             if(category == "") selCat = "Selecione a categoria"; else selCat = category;
-            if(liberadoVenda.substring(0,1) == "S") {
-                libVendaS = true;
-                libVendaN = false;
-            } else if(liberadoVenda.substring(0,1) == "N"){
-                libVendaN = true;
-                libVendaS = false;
+            if (liberadoVenda.equalsIgnoreCase("")){
+                libVendaN = "";
+                libVendaS = "";
+            } else if(liberadoVenda.equalsIgnoreCase("S")) {
+                libVendaS = "checked";
+                libVendaN = "";
+            } else if(liberadoVenda.equalsIgnoreCase("N")){
+                libVendaN = "checked";
+                libVendaS = "";
             }
         %>
         
@@ -77,13 +80,13 @@
                     </div>
                     <div class="mb-4">
                         <label for="quantidade-disponivel-produto" class="form-label">Quantidade Disponivel</label>
-                        <input type="number" class="dinheiro form-control " id="quantidade-disponivel-produto" name="quantidade_disponivel" value="<%= qtdDisponivel %>" required size="30" placeholder="Quantidade Disponivel" step="0.01"/>
+                        <input type="number" class="dinheiro form-control " id="quantidade-disponivel-produto" name="quantidade_disponivel" value="<%= qtdDisponivel %>" required size="30" placeholder="Quantidade Disponivel" step="1"/>
                     </div>
                     <div class="mb-4">
                         <label for="liberado-venda-produto" class="form-label">Liberado para venda:</label><br>
-                        <input type="radio" checked=<%= libVendaS %> id="liberado-venda-produto-S" name="liberado-venda" value="S"/>
+                        <input type="radio" <%= libVendaS %> id="liberado-venda-produto-S" name="liberado_venda" value="S"/>
                         <label for="liberado-venda-produto-S" class="form-label">Sim</label><br>
-                        <input type="radio" checked=<%= libVendaN %> id="liberado-venda-produto-N" name="liberado-venda" value="N"/>
+                        <input type="radio" <%=libVendaN %> id="liberado-venda-produto-N" name="liberado_venda" value="N"/>
                         <label for="liberado-venda-produto-N" class="form-label">Não</label>
                     </div>
                     <div class="mb-4">

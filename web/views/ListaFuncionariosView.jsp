@@ -26,11 +26,11 @@
                     <thead>
                         <tr>
                             <th scope="col">Id</th>
-                            <th scope="col">Nome do Funcionario</th>
+                            <th scope="col">Nome do Funcionário</th>
                             <th scope="col">CPF</th>
                             <th scope="col">Senha</th>
                             <th scope="col">Papel</th>
-                            <th scope="col"><div class="float-right">Ações</div><br></th>
+                            <th scope="col"><div class="float-right">Ações</div></th>
                         </tr>
                     </thead> 
                     <tbody>
@@ -39,13 +39,21 @@
                             for (Funcionario employee : employees) {
                                 String edit_link = "FuncionarioController?option=edit&id="+employee.getId();
                                 String delete_link = "FuncionarioController?option=delete&id="+employee.getId();
+                                
+                                String papel = employee.getPapel();
+                                if (papel == "") papel = "";
+                                else if (papel.equals("0")) papel = "Administrador";
+                                else if (papel.equals("1")) papel = "Vendedor";
+                                else if (papel.equals("2")) papel = "Comprador";
+                                
+
                         %>
                         <tr>
-                            <td><%=employee.getId()%></td>
-                            <td><%=employee.getNome()%></td>
-                            <td><%=employee.getDocumento()%></td>
-                            <td><%=employee.getSenha()%></td>
-                            <td><%=employee.getPapel()%></td>
+                            <td><%= employee.getId() %></td>
+                            <td><%= employee.getNome() %></td>
+                            <td><%= employee.getDocumento() %></td>
+                            <td><%= employee.getSenha() %></td>
+                            <td><%= papel %></td>
 
                             <td>
                                 <a href="<%=edit_link%>" class="btn btn-outline-secondary float-right">Editar</a>

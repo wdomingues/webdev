@@ -32,8 +32,8 @@
                             <th scope="col">Valor</th>
                             <th scope="col">CLiente</th>
                             <th scope="col">Produto</th>
-                            <th scope="col">Funcionario</th>
-                            <th scope="col"><div class="float-right">Ações</div><br></th>
+                            <th scope="col">Funcionário</th>
+                            <th scope="col"><div class="float-right">Ações</div></th>
                         </tr>
                     </thead> 
                     <tbody>

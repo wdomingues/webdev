@@ -33,7 +33,7 @@
                             <th scope="col">Quantidade</th>
                             <th scope="col">Liberado para venda</th>
                             <th scope="col">Categoria</th>
-                            <th scope="col"><div class="float-right">Ações</div><br></th>
+                            <th scope="col"><div class="float-right">Ações</div></th>
                         </tr>
                     </thead> 
                     <tbody>
@@ -44,9 +44,10 @@
                             for (Produto product : products) {
                                 String category = "";
                                 for(Categoria cat : categories){
-                                    if (cat.getId() == product.getId()) 
+                                    if (cat.getId() == product.getIdCategoria()) { 
                                         category = cat.getNomeCategoria();
-                                    break;
+                                        break;
+                                    }
                                 }
                                 String edit_link = "ProdutoController?option=edit&id="+product.getId();
                                 String delete_link = "ProdutoController?option=delete&id="+product.getId();

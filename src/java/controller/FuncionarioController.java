@@ -119,7 +119,7 @@ public class FuncionarioController extends HttpServlet {
             Funcionario employee = new Funcionario();
             employee.setId(Integer.parseInt(request.getParameter("id")));
             employee.setNome(request.getParameter("nome"));
-            employee.setDocumento(request.getParameter("documento"));
+            employee.setDocumento(request.getParameter("cpf"));
             employee.setSenha(request.getParameter("senha"));
             employee.setPapel(request.getParameter("papel"));
             

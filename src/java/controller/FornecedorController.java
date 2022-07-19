@@ -128,8 +128,8 @@ public class FornecedorController extends HttpServlet {
             supplier.setEndereco(request.getParameter("endereco"));
             supplier.setBairro(request.getParameter("bairro"));
             supplier.setCidade(request.getParameter("cidade"));
-            supplier.setUf(request.getParameter("uf"));
-            supplier.setCep(request.getParameter("cep"));
+            supplier.setUf(request.getParameter("uf").substring(0,2));
+            supplier.setCep(request.getParameter("cep").replace(".", ""));
             supplier.setTelefone(request.getParameter("telefone"));
             supplier.setEmail(request.getParameter("email"));
             

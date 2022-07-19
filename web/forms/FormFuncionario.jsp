@@ -29,14 +29,14 @@
             String selPapel = "";
             String selPapelExt = "";
             if(papel == "") selPapelExt = "Selecione o papel"; 
-            else if(papel.substring(0,1) == "V") {
-                selPapel = "V";
+            else if(papel.equalsIgnoreCase("1")) {
+                selPapel = "1";
                 selPapelExt = "Vendedor";
-            } else if(papel.substring(0,1) == "C") {
-                selPapel = "C";
+            } else if(papel.equalsIgnoreCase("2")) {
+                selPapel = "2";
                 selPapelExt = "Comprador";
-            } else if(papel.substring(0,1) == "A") {
-                selPapel = "A";
+            } else if(papel.equalsIgnoreCase("0")) {
+                selPapel = "0";
                 selPapelExt = "Administrador";
             }
         %>
@@ -59,16 +59,16 @@
                         <input type="text" class="form-control" id="cpf-funcionario" name="cpf" value="<%= cpf %>" required size="14" placeholder="999.999.999-00" data-mask="000.000.000-00"/>
                     </div>
                     <div class="mb-4">
-                        <label for="senha-funcionario" class="form-label">Senha:</label>
+                        <label for="senha-funcionario" class="form-label">Senha (máx. 10 caracteres):</label>
                         <input type="password" class="form-control" id="senha-funcionario" name="senha" value="<%= senha %>" required size="10"/>
                     </div>
                     <div class="mb-4">
                         <label for="papel-funcionario" class="form-label">Papel:</label>
                         <select class="form-control" id="papel-funcionario" name="papel" required>
                             <option value="<%= selPapel %>"><%= selPapelExt %></option>
-                            <option value="V">Vendedor</option>
-                            <option value="C">Comprador</option>
-                            <option value="A">Administrador</option>
+                            <option value="0">Administrador</option>
+                            <option value="1">Vendedor</option>
+                            <option value="2">Comprador</option>
                         </select>
                     </div>
                     <div class="mb-4 center-horizontally">

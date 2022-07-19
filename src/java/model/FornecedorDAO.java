@@ -86,7 +86,7 @@ public class FornecedorDAO extends HttpServlet {
             
             if (rs.next()) {
                 supplier.setId(rs.getInt("id"));
-                supplier.setNome(rs.getString("razaoSocial"));
+                supplier.setNome(rs.getString("razao_social"));
                 supplier.setDocumento(rs.getString("cnpj"));
                 supplier.setEndereco(rs.getString("endereco"));
                 supplier.setBairro(rs.getString("bairro"));

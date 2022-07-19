@@ -4,7 +4,7 @@
     Author     : winne
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" import="java.lang.String"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -16,13 +16,26 @@
             <jsp:include page="NavBar.html" />
 
             <div class="col-8 mt-5">
-
+        <% 
+            String mensagem = (String) request.getAttribute("message");
+            if (mensagem.toLowerCase().contains("erro")){
+        %>
+                <div class="alert alert-danger" role="alert">
+                    <h5>
+                        <%= mensagem %>
+                    </h5>
+                </div>    
+        <%    
+            } else {
+        %>
                 <div class="alert alert-success" role="alert">
                     <h5>
-                        <%= request.getAttribute("message") %>
+                        <%= mensagem %>
                     </h5>
                 </div>
-
+        <%
+            }
+        %>
                 <p></p>
                 <div><a href="VendaController?option=get">Voltar</a></div>
             </div>
