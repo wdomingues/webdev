@@ -26,6 +26,7 @@ import model.ClienteDAO;
 import java.lang.Integer;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import static utils.Validators.convertDateString2Date;
 /**
  *
  * @author winne
@@ -145,12 +146,9 @@ public class VendaController extends HttpServlet {
             Venda venda = new Venda();
             
             String dataStr = request.getParameter("data_venda");
-            try {
-                Date data = new SimpleDateFormat("yyyy-MM-dd").parse(dataStr);
-                venda.setDataVenda(data);
-            } catch (ParseException e) {
-                throw new IllegalArgumentException(e);
-            }
+            
+            venda.setDataVenda(convertDateString2Date(dataStr));
+            
             
             venda.setId(Integer.parseInt(request.getParameter("id")));
             venda.setQuantidadeVenda(Integer.parseInt(request.getParameter("quantidade_venda")));

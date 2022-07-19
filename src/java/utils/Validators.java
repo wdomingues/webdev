@@ -5,6 +5,14 @@
  */
 package utils;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Queue;
+
 /**
  *
  * @author winne
@@ -17,4 +25,110 @@ public class Validators {
         if (i == 0) return 0f;
         return i / 1f;
     }
+    
+    public static Date convertDateString2Date(String dateString){
+        try {
+            Date data = new SimpleDateFormat("yyyy-MM-dd").parse(dateString);
+            return data;
+        } catch (ParseException e) {
+            throw new IllegalArgumentException(e);
+        }
+    }
+    public static String convertDate2String(Date date){
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY");
+        String strDate = dateFormat.format(date);
+        return strDate;
+    }
+    public static String cpfViewFormatter(String str){
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY");
+        String strDate = dateFormat.format(str);
+        return strDate;
+    }
+    public static String enderecoViewFormatter(String str){
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY");
+        String strDate = dateFormat.format(str);
+        return strDate;
+    }
+    public static String cepViewFormatter(String str){
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY");
+        String strDate = dateFormat.format(str);
+        return strDate;
+    }
+    public static String telefoneViewFormatter(String str){
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY");
+        String strDate = dateFormat.format(str);
+        return strDate;
+    }
+    public static String emailViewFormatter(String str){
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY");
+        String strDate = dateFormat.format(str);
+        return strDate;
+    }
+    public static String cnpjViewFormatter(String str){
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY");
+        String strDate = dateFormat.format(str);
+        return strDate;
+    }
+    public static String senhaValidator(String str){
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY");
+        String strDate = dateFormat.format(str);
+        return strDate;
+    }
+    public static String cpfValidator(String str){
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY");
+        String strDate = dateFormat.format(str);
+        return strDate;
+    }
+    public static String cnpjValidator(String str){
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY");
+        String strDate = dateFormat.format(str);
+        return strDate;
+    }
+    public static String cepValidator(String str){
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY");
+        String strDate = dateFormat.format(str);
+        return strDate;
+    }
+    public static String telefoneValidator(String str){
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY");
+        String strDate = dateFormat.format(str);
+        return strDate;
+    }
+    public static String emailValidator(String str){
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY");
+        String strDate = dateFormat.format(str);
+        return strDate;
+    }
+    public static String valorViewFormatter(Float valor){
+        String parsedValor = String.valueOf(valor).replace(".",",");
+        String intPart = parsedValor.split(",")[0];
+        ArrayDeque<String> intPartsArr = new ArrayDeque<String>();
+        String join = "";
+        if (intPart.length()>3){
+            int tam = intPart.length();
+            int i = 0;
+            String[] intPartSplit = intPart.split("");
+            for (int k= (intPartSplit.length-1); k>=0; k--){
+                if (i!=0 && i%3 == 0){
+                    intPartsArr.push(".");
+                }
+                intPartsArr.push(intPartSplit[k]);
+                i++;
+           }
+           for (String part : intPartsArr){
+               join += intPartsArr.pop();
+           }
+        } else join = intPart;
+        join = "R$ ".concat(join);
+        
+        String decimalPart = parsedValor.split(",")[1];
+        if (decimalPart != ""){
+            int decimalPartLength = decimalPart.length();
+            if (decimalPartLength == 1)
+                return join + ","+decimalPart+"0";
+            else return join + ","+decimalPart;
+        }
+        return join+","+decimalPart+"00";
+    }
+    
 }

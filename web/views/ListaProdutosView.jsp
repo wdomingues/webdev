@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import="java.util.*,application.Produto, application.Categoria" %>
+<%@ page import="utils.Validators, java.util.*,application.Produto, application.Categoria" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -56,8 +56,8 @@
                             <td><%=product.getId()%></td>
                             <td><%=product.getNomeProduto()%></td>
                             <td><%=product.getDescricao()%></td>
-                            <td><%=product.getPrecoCompra()%></td>
-                            <td><%=product.getPrecoVenda()%></td>
+                            <td><%=Validators.valorViewFormatter(product.getPrecoCompra())%></td>
+                            <td><%=Validators.valorViewFormatter(product.getPrecoVenda())%></td>
                             <td><%=product.getQuantidadeDisponivel()%></td>
                             <td><%=product.getLiberadoVenda()%></td>
                             <td><%=category%></td>

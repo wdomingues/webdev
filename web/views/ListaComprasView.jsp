@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import="java.util.*,application.Compra, application.Fornecedor, application.Produto, application.Funcionario" %>
+<%@ page import="utils.Validators, java.util.*,application.Compra, application.Fornecedor, application.Produto, application.Funcionario" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -71,8 +71,8 @@
                         <tr>
                             <td><%=compra.getId()%></td>
                             <td><%=compra.getQuantidadeCompra()%></td>
-                            <td><%=compra.getDataCompra()%></td>
-                            <td><%=compra.getValorCompra()%></td>
+                            <td><%=Validators.convertDate2String(compra.getDataCompra())%></td>
+                            <td><%=Validators.valorViewFormatter(compra.getValorCompra())%></td>
                             <td><%=supplier%></td>
                             <td><%=product%></td>
                             <td><%=employee%></td>
