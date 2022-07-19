@@ -15,7 +15,6 @@
     </head>
 
     <body>
-        <%@include file="../auxJSPs/NavBar.html" %>
         <%
             ArrayList<Funcionario> employees = (ArrayList<Funcionario>) request.getAttribute("myEmployees");
 
@@ -39,7 +38,13 @@
                 selPapel = "0";
                 selPapelExt = "Administrador";
             }
+        Funcionario usuario = (Funcionario) request.getSession().getAttribute("usuario");
+            String nomeUsuario = usuario.getNome();
+            
         %>
+        <%@include file="../auxJSPs/NavBar"%>
+            <%=nomeUsuario%>
+        <%=".html" %>
         
         <div class="forms">
             <h2 class="m-5">
@@ -60,7 +65,7 @@
                     </div>
                     <div class="mb-4">
                         <label for="senha-funcionario" class="form-label">Senha (máx. 10 caracteres):</label>
-                        <input type="password" class="form-control" id="senha-funcionario" name="senha" value="<%= senha %>" required size="10"/>
+                        <input type="password" class="form-control" id="senha-funcionario" name="senha" value="<%= senha %>" required size="10" maxlength="10"/>
                     </div>
                     <div class="mb-4">
                         <label for="papel-funcionario" class="form-label">Papel:</label>

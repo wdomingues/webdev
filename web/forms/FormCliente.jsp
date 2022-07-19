@@ -4,7 +4,7 @@
     Author     : winne
 --%>
 
-<%@page import="application.Cliente, java.lang.String, java.lang.Integer, java.util.ArrayList" %>
+<%@page import="application.Cliente, application.Funcionario, java.lang.String, java.lang.Integer, java.util.ArrayList" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!doctype html>
@@ -15,7 +15,6 @@
     </head>
 
     <body>
-        <%@include file="../auxJSPs/NavBar.html" %>
         <%
             ArrayList<Cliente> clients = (ArrayList<Cliente>) request.getAttribute("myClients");
 
@@ -34,7 +33,13 @@
             String selUf = "";
             if(uf == "") selUf = "Selecione a UF"; else selUf = uf;
 
+            Funcionario usuario = (Funcionario) request.getSession().getAttribute("usuario");
+            String nomeUsuario = usuario.getNome();
+            
         %>
+        <%@include file="../auxJSPs/NavBar"%>
+            <%=nomeUsuario%>
+        <%=".html" %>
         
         <div class="forms">
             <h2 class="m-5">

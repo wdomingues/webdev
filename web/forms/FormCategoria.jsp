@@ -3,7 +3,7 @@
     Created on : 14/07/2022, 19:26:23
     Author     : winne
 --%>
-<%@page import="application.Categoria"%>
+<%@page import="application.Categoria, application.Funcionario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!doctype html>
@@ -14,10 +14,16 @@
     </head>
 
     <body>
-        <%@include file="../auxJSPs/NavBar.html" %>
         <%
             Categoria cat = (Categoria)request.getAttribute("category");
+            Funcionario usuario = (Funcionario) request.getSession().getAttribute("usuario");
+            String nomeUsuario = usuario.getNome();
+            
         %>
+        <%@include file="../auxJSPs/NavBar"%>
+            <%=nomeUsuario%>
+        <%=".html" %>
+        
         <div class="forms">
             <h2 class="m-5">
                 Cadastro de Categoria

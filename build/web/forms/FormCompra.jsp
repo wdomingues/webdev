@@ -4,7 +4,7 @@
     Author     : winne
 --%>
 
-<%@page import="application.Compra, application.Fornecedor, application.Produto, application.Funcionario, java.lang.String, java.lang.Integer, java.util.ArrayList, java.util.Date" %>
+<%@page import="application.Compra, application.Funcionario, application.Fornecedor, application.Produto, application.Funcionario, java.lang.String, java.lang.Integer, java.util.ArrayList, java.util.Date" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!doctype html>
@@ -15,7 +15,6 @@
     </head>
 
     <body>
-        <%@include file="../auxJSPs/NavBar.html" %>
         <%
             ArrayList<Compra> compras = (ArrayList<Compra>) request.getAttribute("myCompras");
             ArrayList<Fornecedor> suppliers = (ArrayList<Fornecedor>) request.getAttribute("mySuppliers");
@@ -61,7 +60,13 @@
             if(product == "") selProd = "Selecione o produto"; else selProd = product;
             if(employee == "") selEmp = "Selecione o funcionario"; else selEmp = employee;
 
+            Funcionario usuario = (Funcionario) request.getSession().getAttribute("usuario");
+            String nomeUsuario = usuario.getNome();
+            
         %>
+        <%@include file="../auxJSPs/NavBar"%>
+            <%=nomeUsuario%>
+        <%=".html" %>
         
         <div class="forms">
             <h2 class="m-5">
