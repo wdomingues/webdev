@@ -43,6 +43,12 @@
                             ArrayList<Produto> products = (ArrayList<Produto>) request.getAttribute("myProducts");
                             ArrayList<Funcionario> employees = (ArrayList<Funcionario>) request.getAttribute("myEmployees");
 
+                            ArrayList<Produto> availableProducts = new ArrayList<>();
+                            for (Produto prod : products){
+                                if (prod.getLiberadoVenda().equalsIgnoreCase("S") && prod.getQuantidadeDisponivel()>0) 
+                                    availableProducts.add(prod);
+                            }
+                            
                             for (Venda venda : vendas) {
                                 String client = "";
                                 for(Cliente cli : clients){
@@ -52,7 +58,7 @@
                                     }
                                 }
                                 String product = "";
-                                for(Produto prod : products){
+                                for(Produto prod : availableProducts){
                                     if (prod.getId() == venda.getIdProduto()) { 
                                         product = prod.getNomeProduto();
                                         break;
