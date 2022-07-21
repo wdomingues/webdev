@@ -118,6 +118,27 @@ public class ProdutoController extends HttpServlet {
                 RequestDispatcher listAfterDeleting = getServletContext().getRequestDispatcher("/views/ListaProdutosView.jsp");
                 listAfterDeleting.forward(request, response);
                 break;
+            
+            case "authorize":
+                myProducts = produtoDAO.getAll();
+                id = Integer.parseInt(request.getParameter("id"));
+                product = produtoDAO.getById(id);
+                
+                String liberado = product.getLiberadoVenda();
+                if (liberado.equalsIgnoreCase("S")) product.setLiberadoVenda("N");
+                if (liberado.equalsIgnoreCase("N")) product.setLiberadoVenda("S");
+
+                produtoDAO.put(product);
+                myProducts = produtoDAO.getAll();
+                request.setAttribute("myProducts", myProducts);
+
+                //request.setAttribute("product", product);
+                RequestDispatcher rs = getServletContext().getRequestDispatcher("/views/ListaProdutosView.jsp");
+                rs.forward(request, response);
+//                String redirect = response.encodeRedirectURL(request.getContextPath()+"/views/ListaProdutosView.jsp");
+//                response.sendRedirect(redirect);
+                
+                break;
         }
     }
 

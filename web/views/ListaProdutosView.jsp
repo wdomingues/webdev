@@ -49,6 +49,7 @@
                                         break;
                                     }
                                 }
+                                String authorize_link = "ProdutoController?option=authorize&id="+product.getId();
                                 String edit_link = "ProdutoController?option=edit&id="+product.getId();
                                 String delete_link = "ProdutoController?option=delete&id="+product.getId();
                         %>
@@ -63,6 +64,16 @@
                             <td><%=category%></td>
 
                             <td>
+                                <%  if (product.getLiberadoVenda().equalsIgnoreCase("S")){
+                                %>
+                                        <a href="<%=authorize_link%>" class="btn btn-outline-warning float-right">Desautorizar Venda</a>
+                                <%
+                                    } else if (product.getLiberadoVenda().equalsIgnoreCase("N")){
+                                %>
+                                        <a href="<%=authorize_link%>" class="btn btn-outline-info float-right">Liberar Venda</a>
+
+                                <%  }
+                                %>
                                 <a href="<%=edit_link%>" class="btn btn-outline-secondary float-right">Editar</a>
                                 <a href="<%=delete_link%>" class="btn btn-outline-danger float-right">Apagar</a>
                             </td> 
