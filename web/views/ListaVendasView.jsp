@@ -45,10 +45,10 @@
 
                             ArrayList<Produto> availableProducts = new ArrayList<>();
                             for (Produto prod : products){
-                                if (prod.getLiberadoVenda().equalsIgnoreCase("S") && prod.getQuantidadeDisponivel()>0) 
+                                if (prod.getLiberadoVenda().equalsIgnoreCase("S") && prod.getQuantidadeDisponivel()>0)
                                     availableProducts.add(prod);
                             }
-                            
+
                             for (Venda venda : vendas) {
                                 String client = "";
                                 for(Cliente cli : clients){
