@@ -18,9 +18,8 @@
 
             <jsp:include page="../auxJSPs/restricteds/NavBarSelector.jsp" />
                    
-            <h1>Lista de Vendas</h1>     
+            <h1>Relatório de Vendas</h1>     
             <p></p>
-            <a href="VendaController?option=insert" class="btn btn-outline-primary">Inserir Novo</a>
             <p></p>
             <div class="table-responsive">
                 <table class="table table-striped">
@@ -33,7 +32,6 @@
                             <th scope="col">Cliente</th>
                             <th scope="col">Produto</th>
                             <th scope="col">Funcionário</th>
-                            <th scope="col"><div class="float-right">Ações</div></th>
                         </tr>
                     </thead> 
                     <tbody>
@@ -66,8 +64,6 @@
                                     }
                                 }
                                 
-                                String edit_link = "VendaController?option=edit&id="+venda.getId();
-                                String delete_link = "VendaController?option=delete&id="+venda.getId();
                         %>
                         <tr>
                             <td><%=venda.getId()%></td>
@@ -77,11 +73,47 @@
                             <td><%=client%></td>
                             <td><%=product%></td>
                             <td><%=employee%></td>
-
-                            <td>
-                                <a href="<%=edit_link%>" class="btn btn-outline-secondary float-right">Editar</a>
-                                <a href="<%=delete_link%>" class="btn btn-outline-danger float-right">Apagar</a>
-                            </td> 
+                        </tr>
+                        <%
+                            }
+                        %>
+                    </tbody>
+                </table>
+            </div>
+            <br>
+            <br>
+            <h1>Relatório de Vendas Totais Diárias</h1>     
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Data da Venda</th>
+                            <th scope="col"><div class="float-right">Total Diário:</div></th>
+                        </tr>
+                    </thead> 
+                    <tbody>
+                        <%
+                            Map<Date,Float> map = new HashMap<>();
+                            for (Venda v : vendas) {
+                                Float vl = 0f;
+                                Date dt = (Date)v.getDataVenda();
+                                float vlAcc = (float) v.getValorVenda();
+                                
+                                if(map.containsKey(dt)){
+                                    vl = (float)map.get(dt);
+                                    map.put(dt, vlAcc+vl);
+                                } else {
+                                    map.put(dt, vlAcc);
+                                }
+                            }
+                            for (Date key : map.keySet()) {
+                                float value = map.get(key);
+                        %>
+                        <tr>
+                            
+                            <td><%=Validators.convertDate2String(key)%></td>
+                            <td><%=Validators.valorViewFormatter(value)%></td>
+                            <td></td> 
                         </tr>
                         <%
                             }

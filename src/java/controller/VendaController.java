@@ -126,6 +126,12 @@ public class VendaController extends HttpServlet {
                 RequestDispatcher listAfterDeleting = getServletContext().getRequestDispatcher("/views/ListaVendasView.jsp");
                 listAfterDeleting.forward(request, response);
                 break;
+            case "getReport":
+                myVendas = vendaDAO.getAll();
+                request.setAttribute("myVendas", myVendas);
+                RequestDispatcher rdReport = getServletContext().getRequestDispatcher("/views/RelatorioVendasView.jsp");
+                rdReport.forward(request, response);
+                break;
         }
     }
 

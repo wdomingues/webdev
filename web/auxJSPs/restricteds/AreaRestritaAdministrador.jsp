@@ -26,7 +26,7 @@
                 
         <div class="container mt-2">
             
-            <%@include file="NavBarNaoLogado.html" %>
+            <%@include file="NavBarAdministrador.html" %>
             <%--<%= request.getAttribute("mensagem") %>--%>
             
             <% 
@@ -35,8 +35,6 @@
             <div style="text-align: right">
                 <h5> Area Restrita - Usuario: <%= usuario.getNome() %>.</h5>
             </div>
-            
-            <h2  style="color: red; text-align: center">As funcionalidades de Administrador serão implementadas para a Entrega#3</h2><br><br>
             <%@include file="../Corpo.html"%>
             
         </div>

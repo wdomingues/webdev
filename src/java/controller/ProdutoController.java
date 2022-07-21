@@ -139,6 +139,24 @@ public class ProdutoController extends HttpServlet {
 //                response.sendRedirect(redirect);
                 
                 break;
+            case "getAvailable":
+                ArrayList<Produto> availableProducts = new ArrayList<>();
+                myProducts = produtoDAO.getAll();
+                for (Produto prod : myProducts){
+                    if (prod.getLiberadoVenda().equalsIgnoreCase("S") && prod.getQuantidadeDisponivel()>0) 
+                        availableProducts.add(prod);
+                }
+                
+                request.setAttribute("availableProducts", availableProducts);
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/views/ListaProdutosDisponiveisView.jsp");
+                rd.forward(request, response);
+                break;
+            case "getReport":
+                myProducts = produtoDAO.getAll();
+                request.setAttribute("myProducts", myProducts);
+                RequestDispatcher rdReport = getServletContext().getRequestDispatcher("/views/RelatorioEstoqueProdutosView.jsp");
+                rdReport.forward(request, response);
+                break;
         }
     }
 
