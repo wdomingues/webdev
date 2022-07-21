@@ -14,10 +14,10 @@
     </head>
     <body>
         <div class="container mt-2">
-            <%@include file="./auxJSPs/NavBarNaoLogado.html" %>
+            <%@include file="./auxJSPs/restricteds/NavBarSelector.jsp" %>
             <%@include file="./auxJSPs/Corpo.html" %>
             
-            <a href = "./forms/FormLogin.jsp">Fazer Login</a>
+            
         </div>
             
         <%@include file="./auxJSPs/BasicScripts.html" %>  

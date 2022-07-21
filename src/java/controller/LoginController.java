@@ -138,7 +138,7 @@ public class LoginController extends HttpServlet {
                     
             if(papel == "") {
                 papelExt = " ";
-                request.setAttribute("mensagem_logado", "Usuario nao identificado");
+                request.setAttribute("message", "Usuario nao identificado");
                 RequestDispatcher rd = request.getRequestDispatcher("/forms/FormLogin.jsp");
                 rd.forward(request, response);
             } 
@@ -150,12 +150,13 @@ public class LoginController extends HttpServlet {
                 } else if(papel.equalsIgnoreCase("0")) {
                     papelExt = "Administrador";
                 }
-                request.setAttribute("mensagem_logado", "Usuario" + papelExt.toUpperCase() + " logado");
+                request.setAttribute("message", "Usuario" + papelExt.toUpperCase() + " logado");
             }   
             HttpSession session = request.getSession();
+            session.setAttribute("papelExt", papelExt);
             session.setAttribute("usuario", employee);
-            
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/auxJSPs/restricteds/AreaRestrita"+papelExt+".jsp");
+            String areaRestrita = "/auxJSPs/restricteds/AreaRestrita"+papelExt+".jsp";
+            RequestDispatcher rd = request.getRequestDispatcher(areaRestrita);
             rd.forward(request, response);
             
             
@@ -173,7 +174,7 @@ public class LoginController extends HttpServlet {
         } catch (Exception e) {
             message = "Erro ao logar!";
             request.setAttribute("message", message);
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/auxJSPs/LoginSavingMessage.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("/auxJSPs/LoginSavingMessage.jsp");
             rd.forward(request, response);
         }
     }

@@ -12,11 +12,8 @@
     </head>
     <body>
         <div class="container mt-2">
-
-            <jsp:include page="NavBar.html" />
-
+            <jsp:include page="./restricteds/NavBarSelector.jsp" />
             <div class="col-8 mt-5">
-
         <% 
             String mensagem = (String) request.getAttribute("message");
             if (mensagem.toLowerCase().contains("erro")){

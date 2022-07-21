@@ -1,5 +1,5 @@
 <%-- 
-    Document   : FornecedorSavingMessage
+    Document   : LoginSavingMessage
     Created on : 14/07/2022, 16:49:37
     Author     : winne
 --%>
@@ -14,6 +14,7 @@
         <div class="container mt-2">
             <jsp:include page="./restricteds/NavBarSelector.jsp" />
             <div class="col-8 mt-5">
+
         <% 
             String mensagem = (String) request.getAttribute("message");
             if (mensagem.toLowerCase().contains("erro")){
@@ -35,7 +36,7 @@
             }
         %>
                 <p></p>
-                <div><a href="FornecedorController?option=get">Voltar</a></div>
+                <div><a href="LoginController">Voltar</a></div>
             </div>
         </div>
 

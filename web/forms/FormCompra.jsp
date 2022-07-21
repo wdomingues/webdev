@@ -64,7 +64,7 @@
             String nomeUsuario = usuario.getNome();
             
         %>
-        <%@include file="../auxJSPs/NavBar"%>
+        <%@include file="../auxJSPs/restricteds/NavBarSelector.jsp"%>
             <%=nomeUsuario%>
         <%=".html" %>
         

@@ -15,7 +15,7 @@
 
         <div class="container mt-2">
 
-            <jsp:include page="../auxJSPs/NavBar.html" />
+            <jsp:include page="../auxJSPs/restricteds/NavBarSelector.jsp" />
                    
             <h1>Lista de Categorias</h1>     
             <p></p>

@@ -12,9 +12,7 @@
     </head>
     <body>
         <div class="container mt-2">
-
-            <jsp:include page="NavBarNaoLogado.html" />
-
+            <jsp:include page="./restricteds/NavBarSelector.jsp" />
             <div class="col-8 mt-5">
 
         <% 
@@ -38,7 +36,7 @@
             }
         %>
                 <p></p>
-                <div><a href="LoginController">Voltar</a></div>
+                <div><a href="LogoutController">Voltar</a></div>
             </div>
         </div>
 

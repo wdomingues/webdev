@@ -15,7 +15,7 @@
     </head>
 
     <body>
-        <%@include file="../auxJSPs/NavBarNaoLogado.html" %>
+        <%@include file="../auxJSPs/restricteds/NavBarSelector.jsp" %>
 
         <div class="forms">
             <h2 class="m-5">
@@ -36,7 +36,7 @@
                         <button type="submit" class="btn btn-dark" id="login-button">Logar</button>
                     </div>
                     
-                    <a href="#" class="btn btn-outline-danger">Voltar</a>
+                    <a href="index.jsp" class="btn btn-outline-danger">Voltar</a>
                 </form>
             </div>
         </div>
