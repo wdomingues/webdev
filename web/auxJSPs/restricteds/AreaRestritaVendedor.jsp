@@ -26,7 +26,7 @@
                 
         <div class="container mt-2">
             
-            <%@include file="NavBarComprador.html" %>
+            <%@include file="NavBarVendedor.html" %>
             <%--<%= request.getAttribute("mensagem") %>--%>
             
             <% 
