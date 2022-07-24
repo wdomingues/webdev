@@ -142,6 +142,7 @@ public class VendaController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
+        Permissions.requireRole(request, VENDEDOR);
         String message;
         try {
             Venda venda = new Venda();
