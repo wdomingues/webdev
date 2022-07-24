@@ -7,13 +7,11 @@ package controller;
 
 
 import application.Categoria;
-import application.Cliente;
 import application.Funcionario;
 import application.Produto;
-import application.Venda;
+
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,10 +19,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.CategoriaDAO;
-import model.ClienteDAO;
-import model.FuncionarioDAO;
 import model.ProdutoDAO;
-import model.VendaDAO;
+
+import static application.Funcionario.Papeis.ADMINISTRADOR;
 
 /**
  *
@@ -32,16 +29,6 @@ import model.VendaDAO;
  */
 @WebServlet(name = "ProdutoController", urlPatterns = {"/ProdutoController"})
 public class ProdutoController extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -57,7 +44,7 @@ public class ProdutoController extends HttpServlet {
             throws ServletException, IOException {
         ProdutoDAO produtoDAO = new ProdutoDAO();
         CategoriaDAO categoriaDAO = new CategoriaDAO();
-        String option = (String) request.getParameter("option");
+        String option = request.getParameter("option");
         int id;
         ArrayList<Categoria> myCategories;
         ArrayList<Produto> myProducts;
@@ -152,6 +139,7 @@ public class ProdutoController extends HttpServlet {
                 rd.forward(request, response);
                 break;
             case "getReport":
+                Permissions.requireRole(request, ADMINISTRADOR);
                 myProducts = produtoDAO.getAll();
                 request.setAttribute("myProducts", myProducts);
                 RequestDispatcher rdReport = getServletContext().getRequestDispatcher("/views/RelatorioEstoqueProdutosView.jsp");
