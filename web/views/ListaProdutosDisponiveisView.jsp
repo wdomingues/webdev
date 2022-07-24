@@ -37,7 +37,13 @@
                             ArrayList<Produto> products = (ArrayList<Produto>) request.getAttribute("availableProducts");
                             ArrayList<Categoria> categories = (ArrayList<Categoria>) request.getAttribute("myCategories");
 
-                            for (Produto product : products) {
+                            ArrayList<Produto> availableProducts = new ArrayList<>();
+                            for (Produto prod : products){
+                                if (prod.getLiberadoVenda().equalsIgnoreCase("S") && prod.getQuantidadeDisponivel()>0)
+                                    availableProducts.add(prod);
+                            }
+                            
+                            for (Produto product : availableProducts) {
                                 String category = "";
                                 for(Categoria cat : categories){
                                     if (cat.getId() == product.getIdCategoria()) { 
