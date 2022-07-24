@@ -143,8 +143,10 @@ public class CompraController extends HttpServlet {
         String message;
         try {
             Compra compra = new Compra();
+            Produto product = new Produto();
+            
             String dataStr = request.getParameter("data_compra");
-
+            
             try {
                 Date data = new SimpleDateFormat("yyyy-MM-dd").parse(dataStr);
                 compra.setDataCompra(data);
@@ -157,11 +159,20 @@ public class CompraController extends HttpServlet {
             compra.setIdFornecedor(Integer.parseInt(request.getParameter("id_fornecedor")));
             compra.setIdProduto(Integer.parseInt(request.getParameter("id_produto")));
             compra.setIdFuncionario(Integer.parseInt(request.getParameter("id_funcionario")));
-
+            
+            ProdutoDAO produtoDAO = new ProdutoDAO();
+            product = produtoDAO.getById(compra.getIdProduto());
+            product.setPrecoCompra(compra.getValorCompra());
+            product.setQuantidadeDisponivel(product.getQuantidadeDisponivel()+compra.getQuantidadeCompra());
+            
             CompraDAO compraDAO = new CompraDAO();
 
             if (compraDAO.put(compra)) {
-                message = "Compra salva com sucesso!";
+                if ((produtoDAO.put(product))){
+                    message = "Compra salva com sucesso!";
+                } else{
+                    message = "Erro: Compra salva, mas estoque não atualizado";
+                }
             } else {
                 message = "Erro ao salvar a compra!";
             }
