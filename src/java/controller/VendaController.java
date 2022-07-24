@@ -26,6 +26,8 @@ import model.ClienteDAO;
 import java.lang.Integer;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+
+import static application.Funcionario.Papeis.ADMINISTRADOR;
 import static utils.Validators.convertDateString2Date;
 /**
  *
@@ -33,16 +35,6 @@ import static utils.Validators.convertDateString2Date;
  */
 @WebServlet(name = "VendaController", urlPatterns = {"/VendaController"})
 public class VendaController extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -127,6 +119,7 @@ public class VendaController extends HttpServlet {
                 listAfterDeleting.forward(request, response);
                 break;
             case "getReport":
+                Permissions.requireRole(request, ADMINISTRADOR);
                 myVendas = vendaDAO.getAll();
                 request.setAttribute("myVendas", myVendas);
                 RequestDispatcher rdReport = getServletContext().getRequestDispatcher("/views/RelatorioVendasView.jsp");
