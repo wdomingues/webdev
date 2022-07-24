@@ -26,6 +26,8 @@ import model.FornecedorDAO;
 import model.ProdutoDAO;
 import model.FuncionarioDAO;
 
+import static application.Funcionario.Papeis.COMPRADOR;
+
 
 /**
  *
@@ -33,16 +35,6 @@ import model.FuncionarioDAO;
  */
 @WebServlet(name = "CompraController", urlPatterns = {"/CompraController"})
 public class CompraController extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -56,12 +48,13 @@ public class CompraController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        Permissions.requireRole(request, COMPRADOR);
         CompraDAO compraDAO = new CompraDAO();
         FornecedorDAO fornecedorDAO = new FornecedorDAO();
         ProdutoDAO produtoDAO = new ProdutoDAO();
         FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
         
-        String option = (String) request.getParameter("option");
+        String option = request.getParameter("option");
         int id;
         
         ArrayList<Compra> myCompras;
@@ -80,6 +73,7 @@ public class CompraController extends HttpServlet {
         
         switch (option) {
             case "get":
+                Permissions.requireRole(request, COMPRADOR);
                 myCompras = compraDAO.getAll();
                 request.setAttribute("myCompras", myCompras);
                 RequestDispatcher show = getServletContext().getRequestDispatcher("/views/ListaComprasView.jsp");
@@ -89,6 +83,7 @@ public class CompraController extends HttpServlet {
                 break;
 
             case "insert":
+                Permissions.requireRole(request, COMPRADOR);
                 compra.setId(0);
                 compra.setQuantidadeCompra(0);
                 compra.setDataCompra(new Date(0));
@@ -103,7 +98,7 @@ public class CompraController extends HttpServlet {
                 break;
 
             case "edit":
-
+                Permissions.requireRole(request, COMPRADOR);
                 id = Integer.parseInt(request.getParameter("id"));
                 compra = compraDAO.getById(id);
 
@@ -120,7 +115,7 @@ public class CompraController extends HttpServlet {
                 break;
 
             case "delete":
-
+                Permissions.requireRole(request, COMPRADOR);
                 id = Integer.parseInt(request.getParameter("id"));
                 compraDAO.delete(id);
 
