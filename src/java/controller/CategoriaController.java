@@ -17,22 +17,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.CategoriaDAO;
 
+import static application.Funcionario.Papeis.COMPRADOR;
+
 /**
  *
  * @author winne
  */
 @WebServlet(name = "CategoriaController", urlPatterns = {"/CategoriaController"})
 public class CategoriaController extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -47,13 +39,14 @@ public class CategoriaController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         CategoriaDAO categoriaDAO = new CategoriaDAO();
-        String option = (String) request.getParameter("option");
+        String option = request.getParameter("option");
         int id;
         ArrayList<Categoria> myCategories;
         Categoria category = new Categoria();
         
         switch (option) {
             case "get":
+                Permissions.requireRole(request, COMPRADOR);
                 myCategories = categoriaDAO.getAll();
                 request.setAttribute("myCategories", myCategories);
                 RequestDispatcher show = getServletContext().getRequestDispatcher("/views/ListaCategoriasView.jsp");
@@ -61,6 +54,7 @@ public class CategoriaController extends HttpServlet {
                 break;
 
             case "insert":
+                Permissions.requireRole(request, COMPRADOR);
                 category.setId(0);
                 category.setNomeCategoria("");
 
@@ -70,6 +64,7 @@ public class CategoriaController extends HttpServlet {
                 break;
 
             case "edit":
+                Permissions.requireRole(request, COMPRADOR);
                 id = Integer.parseInt(request.getParameter("id"));
                 category = categoriaDAO.getById(id);
 
@@ -86,7 +81,7 @@ public class CategoriaController extends HttpServlet {
                 break;
 
             case "delete":
-
+                Permissions.requireRole(request, COMPRADOR);
                 id = Integer.parseInt(request.getParameter("id"));
                 categoriaDAO.delete(id);
 
@@ -110,6 +105,7 @@ public class CategoriaController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
+        Permissions.requireRole(request, COMPRADOR);
         String message;
         try {
             Categoria category = new Categoria();
