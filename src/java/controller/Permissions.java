@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
  * @author fgenu
  */
 public class Permissions {
-    static void requireRole(String role, HttpServletRequest request) throws IOException {
+    static void requireRole(HttpServletRequest request, String role) {
         requireLogin(request);
         HttpSession session = request.getSession();
         Funcionario usuario = (Funcionario) session.getAttribute("usuario");
