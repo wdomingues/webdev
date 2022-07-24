@@ -1,13 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 
 import application.Categoria;
-import application.Funcionario;
 import application.Produto;
 
 import java.io.IOException;
@@ -22,6 +16,7 @@ import model.CategoriaDAO;
 import model.ProdutoDAO;
 
 import static application.Funcionario.Papeis.ADMINISTRADOR;
+import static application.Funcionario.Papeis.COMPRADOR;
 
 /**
  *
@@ -42,6 +37,7 @@ public class ProdutoController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        // Not all operations require permissions
         ProdutoDAO produtoDAO = new ProdutoDAO();
         CategoriaDAO categoriaDAO = new CategoriaDAO();
         String option = request.getParameter("option");
@@ -57,6 +53,7 @@ public class ProdutoController extends HttpServlet {
         
         switch (option) {
             case "get":
+                Permissions.requireRole(request, COMPRADOR);
                 myProducts = produtoDAO.getAll();
                 request.setAttribute("myProducts", myProducts);
                 RequestDispatcher show = getServletContext().getRequestDispatcher("/views/ListaProdutosView.jsp");
@@ -64,6 +61,7 @@ public class ProdutoController extends HttpServlet {
                 break;
                 
             case "insert":
+                Permissions.requireRole(request, COMPRADOR);
                 product.setId(0);
                 product.setNomeProduto("");
                 product.setDescricao("");
@@ -79,7 +77,7 @@ public class ProdutoController extends HttpServlet {
                 break;
 
             case "edit":
-
+                Permissions.requireRole(request, COMPRADOR);
                 id = Integer.parseInt(request.getParameter("id"));
                 product = produtoDAO.getById(id);
 
@@ -96,7 +94,7 @@ public class ProdutoController extends HttpServlet {
                 break;
 
             case "delete":
-
+                Permissions.requireRole(request, COMPRADOR);
                 id = Integer.parseInt(request.getParameter("id"));
                 produtoDAO.delete(id);
 
@@ -107,6 +105,7 @@ public class ProdutoController extends HttpServlet {
                 break;
             
             case "authorize":
+                Permissions.requireRole(request, COMPRADOR);
                 myProducts = produtoDAO.getAll();
                 id = Integer.parseInt(request.getParameter("id"));
                 product = produtoDAO.getById(id);
@@ -127,6 +126,7 @@ public class ProdutoController extends HttpServlet {
                 
                 break;
             case "getAvailable":
+                // No permission required; no login needed
                 ArrayList<Produto> availableProducts = new ArrayList<>();
                 myProducts = produtoDAO.getAll();
                 for (Produto prod : myProducts){
@@ -160,6 +160,7 @@ public class ProdutoController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
+        Permissions.requireRole(request, COMPRADOR);
         String message;
         try {
             Produto product = new Produto();
