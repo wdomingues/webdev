@@ -138,6 +138,7 @@ public class CompraController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        Permissions.requireRole(request, COMPRADOR);
         request.setCharacterEncoding("UTF-8");
         String message;
         try {
