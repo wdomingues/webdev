@@ -115,19 +115,7 @@
                         %>        
                         </select>
                     </div>
-                    <div class="mb-4">
-                        <label for="funcionario-venda" class="form-label">Funcionário:</label>
-                        <select class="form-control" id="funcionario-venda" name="id_funcionario" required>
-                            <option value="<%= empId %>"><%= selEmp %></option>
-                        <%
-                            String aux3 = "";
-                            for (Funcionario e : employees){
-                                aux3 = "<option value="+ e.getId() + ">" + e.getNome() + "</option>\n";
-                                out.println(aux3);
-                            }
-                        %>        
-                        </select>
-                    </div>
+                    <input type="hidden" class="form-control" name="id_funcionario" value="<%= usuario.getId() %>">
                     <div class="mb-4 center-horizontally">
                         <button type="submit" class="btn btn-dark" id="login-button">Salvar</button>
                     </div>
