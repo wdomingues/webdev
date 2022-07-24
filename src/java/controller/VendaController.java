@@ -24,10 +24,9 @@ import model.FuncionarioDAO;
 import model.ProdutoDAO;
 import model.ClienteDAO;
 import java.lang.Integer;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 import static application.Funcionario.Papeis.ADMINISTRADOR;
+import static application.Funcionario.Papeis.VENDEDOR;
 import static utils.Validators.convertDateString2Date;
 /**
  *
@@ -48,12 +47,13 @@ public class VendaController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        Permissions.requireRole(request, ADMINISTRADOR, VENDEDOR);
         VendaDAO vendaDAO = new VendaDAO();
         ClienteDAO clienteDAO = new ClienteDAO();
         ProdutoDAO produtoDAO = new ProdutoDAO();
         FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
         
-        String option = (String) request.getParameter("option");
+        String option = request.getParameter("option");
         int id;
                 
         ArrayList<Venda> myVendas;
@@ -72,12 +72,14 @@ public class VendaController extends HttpServlet {
                 
         switch (option) {
             case "get":
+                Permissions.requireRole(request, VENDEDOR);
                 myVendas = vendaDAO.getAll();
                 request.setAttribute("myVendas", myVendas);
                 RequestDispatcher show = getServletContext().getRequestDispatcher("/views/ListaVendasView.jsp");
                 show.forward(request, response);
                 break;
             case "insert":
+                Permissions.requireRole(request, VENDEDOR);
                 venda.setId(0);
                 venda.setQuantidadeVenda(0);
                 venda.setDataVenda(new Date(0));
@@ -92,7 +94,7 @@ public class VendaController extends HttpServlet {
                 break;
 
             case "edit":
-
+                Permissions.requireRole(request, VENDEDOR);
                 id = Integer.parseInt(request.getParameter("id"));
                 venda = vendaDAO.getById(id);
 
@@ -109,7 +111,7 @@ public class VendaController extends HttpServlet {
                 break;
 
             case "delete":
-
+                Permissions.requireRole(request, VENDEDOR);
                 id = Integer.parseInt(request.getParameter("id"));
                 vendaDAO.delete(id);
 
