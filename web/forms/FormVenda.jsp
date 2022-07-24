@@ -20,6 +20,7 @@
             ArrayList<Cliente> clients = (ArrayList<Cliente>) request.getAttribute("myClients");
             ArrayList<Produto> products = (ArrayList<Produto>) request.getAttribute("myProducts");
             ArrayList<Funcionario> employees = (ArrayList<Funcionario>) request.getAttribute("myEmployees");
+            ArrayList<Produto> availableProducts = new ArrayList<>();
 
             Venda venda = (Venda)request.getAttribute("venda");
             int qtdVenda = venda.getQuantidadeVenda();
@@ -46,6 +47,7 @@
                     break;
                 }
             }
+            
             String employee = "";
             String selEmp = "";
             int empId = 0;
@@ -109,8 +111,10 @@
                         <%
                             String aux2 = "";
                             for (Produto p : products){
-                                aux2 = "<option value="+ p.getId() + ">" + p.getNomeProduto() + "</option>\n";
-                                out.println(aux2);
+                                if (p.getLiberadoVenda().equalsIgnoreCase("S") && p.getQuantidadeDisponivel()>0){
+                                    aux2 = "<option value="+ p.getId() + ">" + p.getNomeProduto() + "</option>\n";
+                                    out.println(aux2);
+                                } 
                             }
                         %>        
                         </select>
