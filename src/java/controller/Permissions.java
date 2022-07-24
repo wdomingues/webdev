@@ -1,20 +1,22 @@
 package controller;
 
 import application.Funcionario;
-import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import static java.util.Arrays.asList;
 
 /**
  *
  * @author fgenu
  */
 public class Permissions {
-    static void requireRole(HttpServletRequest request, String role) {
+    static void requireRole(HttpServletRequest request, String... role) {
         requireLogin(request);
         HttpSession session = request.getSession();
         Funcionario usuario = (Funcionario) session.getAttribute("usuario");
-        if (!usuario.getPapel().equals(role)) {
+        boolean allowed = asList(role).contains(usuario.getPapel());
+        if (!allowed) {
             throw new PermissionDeniedException("Permissões insuficientes para realizar a operação.");
         }
     }
