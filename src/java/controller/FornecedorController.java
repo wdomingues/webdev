@@ -17,22 +17,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.FornecedorDAO;
 
+import static application.Funcionario.Papeis.*;
+
 /**
  *
  * @author winne
  */
 @WebServlet(name = "FornecedorController", urlPatterns = {"/FornecedorController"})
 public class FornecedorController extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -46,14 +38,16 @@ public class FornecedorController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        Permissions.requireRole(request, COMPRADOR);
         FornecedorDAO fornecedorDAO = new FornecedorDAO();
-        String option = (String) request.getParameter("option");
+        String option = request.getParameter("option");
         int id;
         ArrayList<Fornecedor> mySuppliers;
         Fornecedor supplier = new Fornecedor();
         
         switch (option) {
             case "get":
+                Permissions.requireRole(request, COMPRADOR);
                 mySuppliers = fornecedorDAO.getAll();
                 request.setAttribute("mySuppliers", mySuppliers);
                 RequestDispatcher show = getServletContext().getRequestDispatcher("/views/ListaFornecedoresView.jsp");
@@ -61,6 +55,7 @@ public class FornecedorController extends HttpServlet {
                 break;
 
             case "insert":
+                Permissions.requireRole(request, COMPRADOR);
                 supplier.setId(0);
                 supplier.setNome("");
                 supplier.setDocumento("");
@@ -78,7 +73,7 @@ public class FornecedorController extends HttpServlet {
                 break;
 
             case "edit":
-
+                Permissions.requireRole(request, COMPRADOR);
                 id = Integer.parseInt(request.getParameter("id"));
                 supplier = fornecedorDAO.getById(id);
 
@@ -95,7 +90,7 @@ public class FornecedorController extends HttpServlet {
                 break;
 
             case "delete":
-
+                Permissions.requireRole(request, COMPRADOR);
                 id = Integer.parseInt(request.getParameter("id"));
                 fornecedorDAO.delete(id);
 
@@ -118,6 +113,7 @@ public class FornecedorController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        Permissions.requireRole(request, COMPRADOR);
         request.setCharacterEncoding("UTF-8");
         String message;
         try {
