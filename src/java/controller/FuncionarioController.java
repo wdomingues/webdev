@@ -46,6 +46,11 @@ public class FuncionarioController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        Funcionario usuario = (Funcionario) request.getSession().getAttribute("usuario");
+        if (!usuario.getPapel().equals("0")) {
+            response.sendError(response.SC_FORBIDDEN);
+            return;
+        }
         FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
         String option = (String) request.getParameter("option");
         int id;
