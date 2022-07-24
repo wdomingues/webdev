@@ -26,16 +26,6 @@ import static application.Funcionario.Papeis.ADMINISTRADOR;
 @WebServlet(name = "FuncionarioController", urlPatterns = {"/FuncionarioController"})
 public class FuncionarioController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -50,7 +40,7 @@ public class FuncionarioController extends HttpServlet {
             throws ServletException, IOException {
         Permissions.requireRole(request, ADMINISTRADOR);
         FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-        String option = (String) request.getParameter("option");
+        String option = request.getParameter("option");
         int id;
         ArrayList<Funcionario> myEmployees;
         Funcionario employee = new Funcionario();
