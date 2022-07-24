@@ -37,6 +37,8 @@
                     </thead> 
                     <tbody>
                         <%
+                            Funcionario usuario = (Funcionario) request.getSession().getAttribute("usuario");
+                            
                             ArrayList<Compra> compras = (ArrayList<Compra>) request.getAttribute("myCompras");
                             ArrayList<Fornecedor> suppliers = (ArrayList<Fornecedor>) request.getAttribute("mySuppliers");
                             ArrayList<Produto> products = (ArrayList<Produto>) request.getAttribute("myProducts");
@@ -78,8 +80,14 @@
                             <td><%=employee%></td>
 
                             <td>
+                            <%
+                                if (usuario.getId() == compra.getIdFuncionario()) { 
+                            %>
                                 <a href="<%=edit_link%>" class="btn btn-outline-secondary float-right">Editar</a>
                                 <a href="<%=delete_link%>" class="btn btn-outline-danger float-right">Apagar</a>
+                            <%
+                                }
+                            %>
                             </td> 
                         </tr>
                         <%

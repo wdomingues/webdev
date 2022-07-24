@@ -97,6 +97,7 @@ public class VendaController extends HttpServlet {
                 Permissions.requireRole(request, VENDEDOR);
                 id = Integer.parseInt(request.getParameter("id"));
                 venda = vendaDAO.getById(id);
+                Permissions.requireUserId(request, venda.getIdFuncionario());
 
                 if (venda.getId() > 0) {
                     request.setAttribute("venda", venda);
@@ -113,6 +114,9 @@ public class VendaController extends HttpServlet {
             case "delete":
                 Permissions.requireRole(request, VENDEDOR);
                 id = Integer.parseInt(request.getParameter("id"));
+                venda = vendaDAO.getById(id);
+                Permissions.requireUserId(request, venda.getIdFuncionario());
+
                 vendaDAO.delete(id);
 
                 myVendas = vendaDAO.getAll();
@@ -143,6 +147,7 @@ public class VendaController extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         Permissions.requireRole(request, VENDEDOR);
+        Permissions.requireUserId(request, Integer.parseInt(request.getParameter("id_funcionario")));
         String message;
         try {
             Venda venda = new Venda();

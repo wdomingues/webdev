@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 
@@ -101,6 +96,7 @@ public class CompraController extends HttpServlet {
                 Permissions.requireRole(request, COMPRADOR);
                 id = Integer.parseInt(request.getParameter("id"));
                 compra = compraDAO.getById(id);
+                Permissions.requireUserId(request, compra.getIdFuncionario());
 
                 if (compra.getId() > 0) {
                     request.setAttribute("compra", compra);
@@ -117,6 +113,9 @@ public class CompraController extends HttpServlet {
             case "delete":
                 Permissions.requireRole(request, COMPRADOR);
                 id = Integer.parseInt(request.getParameter("id"));
+                compra = compraDAO.getById(id);
+                Permissions.requireUserId(request, compra.getIdFuncionario());
+
                 compraDAO.delete(id);
 
                 myCompras = compraDAO.getAll();
@@ -138,8 +137,9 @@ public class CompraController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Permissions.requireRole(request, COMPRADOR);
         request.setCharacterEncoding("UTF-8");
+        Permissions.requireRole(request, COMPRADOR);
+        Permissions.requireUserId(request, Integer.parseInt(request.getParameter("id_funcionario")));
         String message;
         try {
             Compra compra = new Compra();

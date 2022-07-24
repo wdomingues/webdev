@@ -1,10 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
-
 
 import application.Cliente;
 import java.io.IOException;
@@ -17,22 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.ClienteDAO;
 
+import static application.Funcionario.Papeis.VENDEDOR;
+
 /**
  *
  * @author winne
  */
 @WebServlet(name = "ClienteController", urlPatterns = {"/ClienteController"})
 public class ClienteController extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -46,14 +32,16 @@ public class ClienteController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        Permissions.requireRole(request, VENDEDOR);
         ClienteDAO clienteDAO = new ClienteDAO();
-        String option = (String) request.getParameter("option");
+        String option = request.getParameter("option");
         int id;
         ArrayList<Cliente> myClients;
         Cliente client = new Cliente();
         
         switch (option) {
             case "get":
+                Permissions.requireRole(request, VENDEDOR);
                 myClients = clienteDAO.getAll();
                 request.setAttribute("myClients", myClients);
                 RequestDispatcher show = getServletContext().getRequestDispatcher("/views/ListaClientesView.jsp");
@@ -61,6 +49,7 @@ public class ClienteController extends HttpServlet {
                 break;
 
             case "insert":
+                Permissions.requireRole(request, VENDEDOR);
                 client.setId(0);
                 client.setNome("");
                 client.setDocumento("");
@@ -78,7 +67,7 @@ public class ClienteController extends HttpServlet {
                 break;
 
             case "edit":
-
+                Permissions.requireRole(request, VENDEDOR);
                 id = Integer.parseInt(request.getParameter("id"));
                 client = clienteDAO.getById(id);
 
@@ -95,7 +84,7 @@ public class ClienteController extends HttpServlet {
                 break;
 
             case "delete":
-
+                Permissions.requireRole(request, VENDEDOR);
                 id = Integer.parseInt(request.getParameter("id"));
                 clienteDAO.delete(id);
 
@@ -119,6 +108,7 @@ public class ClienteController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
+        Permissions.requireRole(request, VENDEDOR);
         String message;
         try {
             Cliente client = new Cliente();
