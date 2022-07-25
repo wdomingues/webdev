@@ -119,6 +119,16 @@ public class FuncionarioController extends HttpServlet {
             Validators.requireValid(employee);
             FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
 
+            for (Funcionario outro : funcionarioDAO.getAll()) {
+                if (employee.getId() == outro.getId()) {
+                    break;
+                } else if (employee.getDocumento().equals(outro.getDocumento())) {
+                    throw new IllegalArgumentException
+                            ("Funcionário com CPF " + employee.getDocumento() + " já cadastrado!");
+                }
+
+            }
+
             if (funcionarioDAO.put(employee)) {
                 message = "Funcionário salvo com sucesso!";
             } else {
