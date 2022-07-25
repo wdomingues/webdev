@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import application.Funcionario;
@@ -24,16 +19,6 @@ import model.FuncionarioDAO;
 @WebServlet(name = "LoginController", urlPatterns = {"/LoginController"})
 public class LoginController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -48,61 +33,6 @@ public class LoginController extends HttpServlet {
             throws ServletException, IOException {
         RequestDispatcher rd = request.getRequestDispatcher("/forms/FormLogin.jsp");
         rd.forward(request,response);
-
-//        FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-//        String option = (String) request.getParameter("option");
-//        int id;
-//        ArrayList<Funcionario> myEmployees;
-//        Funcionario employee = new Funcionario();
-//        
-//        switch (option) {
-//            case "get":
-//                myEmployees = funcionarioDAO.getAll();
-//                request.setAttribute("myEmployees", myEmployees);
-//                RequestDispatcher show = getServletContext().getRequestDispatcher("/views/ListaFuncionariosView.jsp");
-//                show.forward(request, response);
-//                break;
-//
-//            case "insert":
-//                employee.setId(0);
-//                employee.setNome("");
-//                employee.setDocumento("");
-//                employee.setSenha("");
-//                employee.setPapel("");
-//
-//                request.setAttribute("employee", employee);
-//                RequestDispatcher insert = getServletContext().getRequestDispatcher("/forms/FormFuncionario.jsp");
-//                insert.forward(request, response);
-//                break;
-//
-//            case "edit":
-//
-//                id = Integer.parseInt(request.getParameter("id"));
-//                employee = funcionarioDAO.getById(id);
-//
-//                if (employee.getId() > 0) {
-//                    request.setAttribute("employee", employee);
-//                    RequestDispatcher rs = request.getRequestDispatcher("/forms/FormFuncionario.jsp");
-//                    rs.forward(request, response);
-//                } else {
-//                    String message = "Erro ao salvar funcionario!";
-//                    request.setAttribute("message", message);
-//                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/auxJSPs/FuncionarioSavingMessage.jsp");
-//                    rd.forward(request, response);
-//                }
-//                break;
-//
-//            case "delete":
-//
-//                id = Integer.parseInt(request.getParameter("id"));
-//                funcionarioDAO.delete(id);
-//
-//                myEmployees = funcionarioDAO.getAll();
-//                request.setAttribute("myEmployees", myEmployees);
-//                RequestDispatcher listAfterDeleting = getServletContext().getRequestDispatcher("/views/ListaFuncionariosView.jsp");
-//                listAfterDeleting.forward(request, response);
-//                break;
-//        }
     }
 
     /**
@@ -158,18 +88,6 @@ public class LoginController extends HttpServlet {
             String areaRestrita = "/auxJSPs/restricteds/AreaRestrita"+papelExt+".jsp";
             RequestDispatcher rd = request.getRequestDispatcher(areaRestrita);
             rd.forward(request, response);
-            
-            
-//            if (employee.getId() > 0) {
-//                request.setAttribute("employee", employee);
-//                RequestDispatcher rs = request.getRequestDispatcher("/forms/FormFuncionario.jsp");
-//                rs.forward(request, response);
-//            } else {
-//                String message = "Erro ao salvar funcionario!";
-//                request.setAttribute("message", message);
-//                RequestDispatcher rd = getServletContext().getRequestDispatcher("/auxJSPs/FuncionarioSavingMessage.jsp");
-//                rd.forward(request, response);
-//            }
 
         } catch (Exception e) {
             message = "Erro ao logar!";
