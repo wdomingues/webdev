@@ -63,64 +63,52 @@ public class Validators {
         return strDate;
     }
     public static String cpfViewFormatter(String str){
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY");
-        String strDate = dateFormat.format(str);
-        return strDate;
+        //TODO implement
+        return str;
     }
     public static String enderecoViewFormatter(String str){
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY");
-        String strDate = dateFormat.format(str);
-        return strDate;
+        //TODO implement
+        return str;
     }
     public static String cepViewFormatter(String str){
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY");
-        String strDate = dateFormat.format(str);
-        return strDate;
+        //TODO implement
+        return str;
     }
     public static String telefoneViewFormatter(String str){
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY");
-        String strDate = dateFormat.format(str);
-        return strDate;
+        //TODO implement
+        return str;
     }
     public static String emailViewFormatter(String str){
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY");
-        String strDate = dateFormat.format(str);
-        return strDate;
+        //TODO implement
+        return str;
     }
     public static String cnpjViewFormatter(String str){
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY");
-        String strDate = dateFormat.format(str);
-        return strDate;
+        //TODO implement
+        return str;
     }
     public static String senhaValidator(String str){
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY");
-        String strDate = dateFormat.format(str);
-        return strDate;
+        //TODO implement
+        return str;
     }
     public static String cpfValidator(String str){
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY");
-        String strDate = dateFormat.format(str);
-        return strDate;
+        //TODO implement
+        return str;
     }
     public static String cnpjValidator(String str){
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY");
-        String strDate = dateFormat.format(str);
-        return strDate;
+        //TODO implement
+        return str;
     }
     public static String cepValidator(String str){
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY");
-        String strDate = dateFormat.format(str);
-        return strDate;
+        //TODO implement
+        return str;
     }
     public static String telefoneValidator(String str){
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY");
-        String strDate = dateFormat.format(str);
-        return strDate;
+        //TODO implement
+        return str;
     }
     public static String emailValidator(String str){
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY");
-        String strDate = dateFormat.format(str);
-        return strDate;
+        //TODO implement
+        return str;
     }
     public static String valorViewFormatter(Float valor){
         String parsedValor = String.valueOf(valor).replace(".",",");
