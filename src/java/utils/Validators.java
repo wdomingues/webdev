@@ -5,19 +5,42 @@
  */
 package utils;
 
+import application.Funcionario;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.Queue;
 
 /**
  *
  * @author winne
  */
 public class Validators {
+    public static void requireValid(Funcionario funcionario) {
+        String nome = funcionario.getNome();
+        String documento = funcionario.getDocumento();
+        String senha = funcionario.getSenha();
+        String papel = funcionario.getPapel();
+        if (nome == null || nome.length() > 50) {
+            throw new IllegalArgumentException("Cadastro negado. Funcionário com nome inválido: " + nome);
+        }
+        if (documento == null || !documento.matches("\\d\\d\\d\\.\\d\\d\\d\\.\\d\\d\\d-\\d\\d")) {
+            throw new IllegalArgumentException("Cadastro negado. Funcionário com CPF inválido: " + documento
+                                             + "; documento deve seguir o padrão 000.000.000-00");
+        }
+        if (senha == null || senha.length() > 10) {
+            throw new IllegalArgumentException("Cadastro negado. Funcionário com senha inválida: " + senha);
+        }
+        if (papel == null
+                   || !(papel.equals(Funcionario.Papeis.ADMINISTRADOR)
+                        || papel.equals(Funcionario.Papeis.VENDEDOR)
+                        || papel.equals(Funcionario.Papeis.COMPRADOR))) {
+            throw new IllegalArgumentException("Cadastro negado. Funcionário com papel inválido: " + papel);
+        }
+    }
+
     public static int convertFloat2Int(float f){
         return Math.round (f * 1f);
     }
