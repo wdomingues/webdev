@@ -168,19 +168,27 @@ public class VendaController extends HttpServlet {
             product = produtoDAO.getById(venda.getIdProduto());
             
             VendaDAO vendaDAO = new VendaDAO();
-            if (product.getQuantidadeDisponivel() >= venda.getQuantidadeVenda() ){
-                product.setQuantidadeDisponivel(product.getQuantidadeDisponivel()-venda.getQuantidadeVenda());
-                if (vendaDAO.put(venda)) {
-                    if ((produtoDAO.put(product))){
-                        message = "Venda salva com sucesso!";
-                    } else{
-                        message = "Erro: Venda salva, mas estoque não atualizado";
+            if (venda.getId() == 0) { // Ou seja, não foi persistido
+                if (product.getQuantidadeDisponivel() >= venda.getQuantidadeVenda()) {
+                    product.setQuantidadeDisponivel(product.getQuantidadeDisponivel() - venda.getQuantidadeVenda());
+                    if (vendaDAO.put(venda)) {
+                        if ((produtoDAO.put(product))) {
+                            message = "Venda salva com sucesso!";
+                        } else {
+                            message = "Erro: Venda salva, mas estoque não atualizado";
+                        }
+                    } else {
+                        message = "Erro ao salvar a venda!";
                     }
+                } else {
+                    message = "Erro: A quantidade desejada é maior que a quantidade disponível!";
+                }
+            } else { // Ou seja, estou editando
+                if (vendaDAO.put(venda)) {
+                        message = "Venda salva com sucesso!";
                 } else {
                     message = "Erro ao salvar a venda!";
                 }
-            } else {
-                message = "Erro: A quantidade desejada é maior que a quantidade disponível!";
             }
 
             request.setAttribute("message", message);
