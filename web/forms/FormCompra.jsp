@@ -62,77 +62,67 @@
 
             Funcionario usuario = (Funcionario) request.getSession().getAttribute("usuario");
             String nomeUsuario = usuario.getNome();
-            String papelUsr = usuario.getPapel();
-            String papelExt = "";
-            switch (papelUsr) {
-                case Funcionario.Papeis.ADMINISTRADOR:
-                    papelExt = "Administrador";
-                    break;
-                case Funcionario.Papeis.VENDEDOR:
-                    papelExt = "Vendedor";
-                    break;
-                case Funcionario.Papeis.COMPRADOR:
-                    papelExt = "Comprador";
-                    break;
-            }
+            String papelExtForm = (String)session.getAttribute("papelExt");
         %>
-        <%@include file="../auxJSPs/restricteds/NavBarSelector.jsp"%>
-        <h3 style='text-align: right'>Usuário logado: <%=nomeUsuario%> - Papel: <%=papelExt%>.</h3>
-        
-        <div class="forms">
-            <h2 class="m-5">
-                Cadastro de Compra
-            </h2>
+        <div class="container mt-2">
+            <%@include file="../auxJSPs/restricteds/NavBarSelector.jsp"%>
+            <h6 style="text-align: right">Área Restrita - Usuário logado: <%=nomeUsuario%> - Papel: <%=papelExtForm%>.</h6>
 
-            <div>
-                <form method="POST" action="CompraController" name="cad-compra" id="cad-compra">
-                    <input type="hidden" class="form-control" name="id" value="<%= compra.getId() %>">
-                    
-                    <div class="mb-4">
-                        <label for="quantidade-compra" class="form-label">Quantidade:</label>
-                        <input type="number" class="form-control" id="quantidade-compra" name="quantidade_compra" value="<%= qtdCompra %>" required size="30" placeholder="Quantidade" step="1"/>
-                    </div>
-                    <div class="mb-4">
-                        <label for="data-compra" class="form-label">Data da compra:</label>
-                        <input type="date" class="form-control" id="data-compra" name="data_compra" value="<%= dataCompra %>" required size="30" placeholder="Data da Compra" step="1"/>
-                    </div>
-                    <div class="mb-4">
-                        <label for="valor-compra" class="form-label">Valor:</label>
-                        <input type="number" class="dinheiro form-control " id="valor-compra" name="valor_compra" value="<%= valorCompra %>" required size="30" placeholder="Valor" step="0.01"/>
-                    </div>
-                    <div class="mb-4">
-                        <label for="fornecedor-compra" class="form-label">Fornecedor:</label>
-                        <select class="form-control" id="fornecedor-compra" name="id_fornecedor" required>
-                            <option value="<%= supId %>"><%= selSup %></option>
-                        <%
-                            String aux = "";
-                            for (Fornecedor f : suppliers){
-                                aux = "<option value="+ f.getId() + ">" + f.getNome() + "</option>\n";
-                                out.println(aux);
-                            }
-                        %>        
-                        </select>
-                    </div>
-                    <div class="mb-4">
-                        <label for="produto-compra" class="form-label">Produto:</label>
-                        <select class="form-control" id="produto-compra" name="id_produto" required>
-                            <option value="<%= prodId %>"><%= selProd %></option>
-                        <%
-                            String aux2 = "";
-                            for (Produto p : products){
-                                aux2 = "<option value="+ p.getId() + ">" + p.getNomeProduto() + "</option>\n";
-                                out.println(aux2);
-                            }
-                        %>        
-                        </select>
-                    </div>
-                    <input type="hidden" class="form-control" name="id_funcionario" value="<%= usuario.getId() %>">
-                    <div class="mb-4 center-horizontally">
-                        <button type="submit" class="btn btn-dark" id="login-button">Salvar</button>
-                    </div>
-                    
-                    <a href="CompraController?option=get" class="btn btn-outline-danger">Voltar</a>
-                </form>
+            <div class="forms">
+                <h2 class="m-5">
+                    Cadastro de Compra
+                </h2>
+
+                <div>
+                    <form method="POST" action="CompraController" name="cad-compra" id="cad-compra">
+                        <input type="hidden" class="form-control" name="id" value="<%= compra.getId() %>">
+
+                        <div class="mb-4">
+                            <label for="quantidade-compra" class="form-label">Quantidade:</label>
+                            <input type="number" class="form-control" id="quantidade-compra" name="quantidade_compra" value="<%= qtdCompra %>" required size="30" placeholder="Quantidade" step="1"/>
+                        </div>
+                        <div class="mb-4">
+                            <label for="data-compra" class="form-label">Data da compra:</label>
+                            <input type="date" class="form-control" id="data-compra" name="data_compra" value="<%= dataCompra %>" required size="30" placeholder="Data da Compra" step="1"/>
+                        </div>
+                        <div class="mb-4">
+                            <label for="valor-compra" class="form-label">Valor:</label>
+                            <input type="number" class="dinheiro form-control " id="valor-compra" name="valor_compra" value="<%= valorCompra %>" required size="30" placeholder="Valor" step="0.01"/>
+                        </div>
+                        <div class="mb-4">
+                            <label for="fornecedor-compra" class="form-label">Fornecedor:</label>
+                            <select class="form-control" id="fornecedor-compra" name="id_fornecedor" required>
+                                <option value="<%= supId %>"><%= selSup %></option>
+                            <%
+                                String aux = "";
+                                for (Fornecedor f : suppliers){
+                                    aux = "<option value="+ f.getId() + ">" + f.getNome() + "</option>\n";
+                                    out.println(aux);
+                                }
+                            %>        
+                            </select>
+                        </div>
+                        <div class="mb-4">
+                            <label for="produto-compra" class="form-label">Produto:</label>
+                            <select class="form-control" id="produto-compra" name="id_produto" required>
+                                <option value="<%= prodId %>"><%= selProd %></option>
+                            <%
+                                String aux2 = "";
+                                for (Produto p : products){
+                                    aux2 = "<option value="+ p.getId() + ">" + p.getNomeProduto() + "</option>\n";
+                                    out.println(aux2);
+                                }
+                            %>        
+                            </select>
+                        </div>
+                        <input type="hidden" class="form-control" name="id_funcionario" value="<%= usuario.getId() %>">
+                        <div class="mb-4 center-horizontally">
+                            <button type="submit" class="btn btn-dark" id="login-button">Salvar</button>
+                        </div>
+
+                        <a href="CompraController?option=get" class="btn btn-outline-danger">Voltar</a>
+                    </form>
+                </div>
             </div>
         </div>
         <%@include file="../auxJSPs/BasicScripts.html" %>

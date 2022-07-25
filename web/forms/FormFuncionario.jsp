@@ -40,59 +40,50 @@
             }
         Funcionario usuario = (Funcionario) request.getSession().getAttribute("usuario");
         String nomeUsuario = usuario.getNome();
-        String papelUsr = usuario.getPapel();
-            String papelExt = "";
-            switch (papelUsr) {
-                case Funcionario.Papeis.ADMINISTRADOR:
-                    papelExt = "Administrador";
-                    break;
-                case Funcionario.Papeis.VENDEDOR:
-                    papelExt = "Vendedor";
-                    break;
-                case Funcionario.Papeis.COMPRADOR:
-                    papelExt = "Comprador";
-                    break;
-            }
+        String papelExtForm = (String)session.getAttribute("papelExt");
         %>
-        <%@include file="../auxJSPs/restricteds/NavBarSelector.jsp"%>
-        <h3 style='text-align: right'>Usuário logado: <%=nomeUsuario%> - Papel: <%=papelExt%>.</h3>
-        
-        <div class="forms">
-            <h2 class="m-5">
-                Cadastro de Funcionario
-            </h2>
+        <div class="container mt-2">
 
-            <div>
-                <form method="POST" action="FuncionarioController" name="cad-funcionario" id="cad-funcionario">
-                    <input type="hidden" class="form-control" name="id" value="<%= id %>">
-                    
-                    <div class="mb-4">
-                        <label for="nome-funcionario" class="form-label">Nome:</label>
-                        <input type="text" class="form-control" id="nome-funcionario" name="nome" value="<%= nome %>" required size="80" placeholder="José da Silva"/>
-                    </div>
-                    <div class="mb-4">
-                        <label for="cpf-funcionario" class="form-label">CPF:</label>
-                        <input type="text" class="form-control" id="cpf-funcionario" name="cpf" value="<%= cpf %>" required size="14" placeholder="999.999.999-00" data-mask="000.000.000-00"/>
-                    </div>
-                    <div class="mb-4">
-                        <label for="senha-funcionario" class="form-label">Senha (máx. 10 caracteres):</label>
-                        <input type="password" class="form-control" id="senha-funcionario" name="senha" value="<%= senha %>" required size="10" maxlength="10"/>
-                    </div>
-                    <div class="mb-4">
-                        <label for="papel-funcionario" class="form-label">Papel:</label>
-                        <select class="form-control" id="papel-funcionario" name="papel" required>
-                            <option value="<%= selPapel %>"><%= selPapelExt %></option>
-                            <option value="0">Administrador</option>
-                            <option value="1">Vendedor</option>
-                            <option value="2">Comprador</option>
-                        </select>
-                    </div>
-                    <div class="mb-4 center-horizontally">
-                        <button type="submit" class="btn btn-dark" id="login-button">Salvar</button>
-                    </div>
-                    
-                    <a href="FuncionarioController?option=get" class="btn btn-outline-danger">Voltar</a>
-                </form>
+            <%@include file="../auxJSPs/restricteds/NavBarSelector.jsp"%>
+            <h6 style="text-align: right">Área Restrita - Usuário logado: <%=nomeUsuario%> - Papel: <%=papelExtForm%>.</h6>
+
+            <div class="forms">
+                <h2 class="m-5">
+                    Cadastro de Funcionario
+                </h2>
+
+                <div>
+                    <form method="POST" action="FuncionarioController" name="cad-funcionario" id="cad-funcionario">
+                        <input type="hidden" class="form-control" name="id" value="<%= id %>">
+
+                        <div class="mb-4">
+                            <label for="nome-funcionario" class="form-label">Nome:</label>
+                            <input type="text" class="form-control" id="nome-funcionario" name="nome" value="<%= nome %>" required size="80" placeholder="José da Silva"/>
+                        </div>
+                        <div class="mb-4">
+                            <label for="cpf-funcionario" class="form-label">CPF:</label>
+                            <input type="text" class="form-control" id="cpf-funcionario" name="cpf" value="<%= cpf %>" required size="14" placeholder="999.999.999-00" data-mask="000.000.000-00"/>
+                        </div>
+                        <div class="mb-4">
+                            <label for="senha-funcionario" class="form-label">Senha (máx. 10 caracteres):</label>
+                            <input type="password" class="form-control" id="senha-funcionario" name="senha" value="<%= senha %>" required size="10" maxlength="10"/>
+                        </div>
+                        <div class="mb-4">
+                            <label for="papel-funcionario" class="form-label">Papel:</label>
+                            <select class="form-control" id="papel-funcionario" name="papel" required>
+                                <option value="<%= selPapel %>"><%= selPapelExt %></option>
+                                <option value="0">Administrador</option>
+                                <option value="1">Vendedor</option>
+                                <option value="2">Comprador</option>
+                            </select>
+                        </div>
+                        <div class="mb-4 center-horizontally">
+                            <button type="submit" class="btn btn-dark" id="login-button">Salvar</button>
+                        </div>
+
+                        <a href="FuncionarioController?option=get" class="btn btn-outline-danger">Voltar</a>
+                    </form>
+                </div>
             </div>
         </div>
         <%@include file="../auxJSPs/BasicScripts.html" %>
