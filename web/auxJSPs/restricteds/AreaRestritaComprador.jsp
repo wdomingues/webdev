@@ -31,11 +31,11 @@
             
             <% 
                 Funcionario usuario = (Funcionario) session.getAttribute("usuario");
+                String nomeUsuario = usuario.getNome();
+                String papelExtSession = (String)session.getAttribute("papelExt");
             %>
-            <div style="text-align: right">
-                <h5> Area Restrita - Usuario: <%= usuario.getNome() %>.</h5>
-            </div>
-            
+            <h6 style="text-align: right">Área Restrita - Usuário logado: <%=nomeUsuario%> - Papel: <%=papelExtSession%>.</h6>
+
             <%@include file="../Corpo.html"%>
             
         </div>
