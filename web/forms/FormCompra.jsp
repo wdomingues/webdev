@@ -62,11 +62,22 @@
 
             Funcionario usuario = (Funcionario) request.getSession().getAttribute("usuario");
             String nomeUsuario = usuario.getNome();
-            
+            String papelUsr = usuario.getPapel();
+            String papelExt = "";
+            switch (papelUsr) {
+                case Funcionario.Papeis.ADMINISTRADOR:
+                    papelExt = "Administrador";
+                    break;
+                case Funcionario.Papeis.VENDEDOR:
+                    papelExt = "Vendedor";
+                    break;
+                case Funcionario.Papeis.COMPRADOR:
+                    papelExt = "Comprador";
+                    break;
+            }
         %>
         <%@include file="../auxJSPs/restricteds/NavBarSelector.jsp"%>
-            <%=nomeUsuario%>
-        <%=".html" %>
+        <h3 style='text-align: right'>Usuário logado: <%=nomeUsuario%> - Papel: <%=papelExt%>.</h3>
         
         <div class="forms">
             <h2 class="m-5">
