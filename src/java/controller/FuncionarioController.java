@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.FuncionarioDAO;
+import utils.Validators;
 
 import static application.Funcionario.Papeis.ADMINISTRADOR;
 
@@ -114,7 +115,8 @@ public class FuncionarioController extends HttpServlet {
             employee.setDocumento(request.getParameter("cpf"));
             employee.setSenha(request.getParameter("senha"));
             employee.setPapel(request.getParameter("papel"));
-            
+
+            Validators.requireValid(employee);
             FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
 
             if (funcionarioDAO.put(employee)) {
@@ -128,7 +130,7 @@ public class FuncionarioController extends HttpServlet {
             rd.forward(request, response);
 
         } catch (Exception e) {
-            message = "Erro ao salvar funcionario!";
+            message = "Erro ao salvar funcionario!\n" + e.getMessage();
             request.setAttribute("message", message);
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/auxJSPs/FuncionarioSavingMessage.jsp");
             rd.forward(request, response);
