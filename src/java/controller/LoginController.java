@@ -31,8 +31,14 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher rd = request.getRequestDispatcher("/forms/FormLogin.jsp");
-        rd.forward(request,response);
+        HttpSession session = request.getSession();
+        RequestDispatcher dispatcher;
+        if (session.getAttribute("usuario") == null) {
+            dispatcher = request.getRequestDispatcher("/forms/FormLogin.jsp");
+        } else {
+            dispatcher = request.getRequestDispatcher("index.jsp");
+        }
+        dispatcher.forward(request,response);
     }
 
     /**
@@ -66,7 +72,7 @@ public class LoginController extends HttpServlet {
             }
             papel = employee.getPapel();
                     
-            if(papel == "") {
+            if("".equals(papel)) {
                 papelExt = " ";
                 request.setAttribute("message", "Usuario nao identificado");
                 RequestDispatcher rd = request.getRequestDispatcher("/forms/FormLogin.jsp");
