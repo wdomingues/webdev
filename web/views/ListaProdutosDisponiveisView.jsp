@@ -12,11 +12,8 @@
         <%@include file="../auxJSPs/Header.html" %>
     </head>
     <body>
-
-        <div class="container mt-2">
-
-            <jsp:include page="../auxJSPs/restricteds/NavBarSelector.jsp" />
-                   
+        <jsp:include page="../auxJSPs/restricteds/NavBarSelector.jsp" />
+        <div class="container mt-2">                   
             <h1>Lista de Produtos Disponíveis</h1>     
             <p></p>
             <p></p>

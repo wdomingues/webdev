@@ -12,10 +12,14 @@
         <%@include file="../auxJSPs/Header.html" %>
     </head>
     <body>
-
+        <% Funcionario usuarioSesao = (Funcionario) request.getSession().getAttribute("usuario");
+            String nomeUsuario = usuarioSesao.getNome();
+            String papelExtForm = (String)session.getAttribute("papelExt");
+        %>
         <div class="container mt-2">
+            <%@include file="../auxJSPs/restricteds/NavBarSelector.jsp"%>
+            <h6 style="text-align: right">Área Restrita - Usuário logado: <%=nomeUsuario%> - Papel: <%=papelExtForm%>.</h6>
 
-            <jsp:include page="../auxJSPs/restricteds/NavBarSelector.jsp" />
                    
             <h1>Lista de Compras</h1>     
             <p></p>

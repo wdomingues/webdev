@@ -151,11 +151,11 @@ public class VendaController extends HttpServlet {
         String message;
         try {
             Venda venda = new Venda();
-            
+            Produto product = new Produto();
+
             String dataStr = request.getParameter("data_venda");
             
             venda.setDataVenda(convertDateString2Date(dataStr));
-            
             
             venda.setId(Integer.parseInt(request.getParameter("id")));
             venda.setQuantidadeVenda(Integer.parseInt(request.getParameter("quantidade_venda")));
@@ -164,12 +164,23 @@ public class VendaController extends HttpServlet {
             venda.setIdProduto(Integer.parseInt(request.getParameter("id_produto")));
             venda.setIdFuncionario(Integer.parseInt(request.getParameter("id_funcionario")));
 
+            ProdutoDAO produtoDAO = new ProdutoDAO();
+            product = produtoDAO.getById(venda.getIdProduto());
+            
             VendaDAO vendaDAO = new VendaDAO();
-
-            if (vendaDAO.put(venda)) {
-                message = "Venda salva com sucesso!";
+            if (product.getQuantidadeDisponivel() >= venda.getQuantidadeVenda() ){
+                product.setQuantidadeDisponivel(product.getQuantidadeDisponivel()-venda.getQuantidadeVenda());
+                if (vendaDAO.put(venda)) {
+                    if ((produtoDAO.put(product))){
+                        message = "Venda salva com sucesso!";
+                    } else{
+                        message = "Erro: Venda salva, mas estoque não atualizado";
+                    }
+                } else {
+                    message = "Erro ao salvar a venda!";
+                }
             } else {
-                message = "Error while saving Venda!";
+                message = "Erro: A quantidade desejada é maior que a quantidade disponível!";
             }
 
             request.setAttribute("message", message);
