@@ -120,9 +120,9 @@ public class FuncionarioController extends HttpServlet {
             FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
 
             if (funcionarioDAO.put(employee)) {
-                message = "Funcionario salvo com sucesso!";
+                message = "Funcionário salvo com sucesso!";
             } else {
-                message = "Erro ao salvar funcionario!";
+                message = "Erro ao salvar funcionário!";
             }
 
             request.setAttribute("message", message);
@@ -130,7 +130,7 @@ public class FuncionarioController extends HttpServlet {
             rd.forward(request, response);
 
         } catch (Exception e) {
-            message = "Erro ao salvar funcionario!\n" + e.getMessage();
+            message = "Erro ao salvar funcionário!\n" + e.getMessage();
             request.setAttribute("message", message);
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/auxJSPs/FuncionarioSavingMessage.jsp");
             rd.forward(request, response);
